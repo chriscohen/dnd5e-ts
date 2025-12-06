@@ -1,0 +1,6 @@
+﻿{
+  "name": "dnd5e-ts",
+  "description": "A library for handing Dungeons & Dragons 5th Edition data in TypeScript.",
+  "version": "0.0.1",
+  "author": "fw190a8 <info@fw190a8.com>"
+}
