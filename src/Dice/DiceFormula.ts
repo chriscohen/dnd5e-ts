@@ -23,6 +23,18 @@ export class DiceFormula {
         return this.lastResult !== undefined;
     }
 
+    get max(): number {
+        let total = 0;
+        this.parts.forEach(part => total += part.max);
+        return total;
+    }
+
+    get min(): number {
+        let total = 0;
+        this.parts.forEach(part => total += part.min);
+        return total;
+    }
+
     roll(): DiceResult[] {
         const results = [];
         this.parts.forEach((part) => {
@@ -34,23 +46,21 @@ export class DiceFormula {
     }
 
     static parse(formula: string): DiceFormulaPart[] {
-        const pieces = formula.split(/d/);
+        const result = [];
+        formula = formula.replace(/\s/g, '');
+        const individualRolls = formula.split(/[=\-]/);
 
-        if (pieces.length !== 2) throw new Error(`Invalid dice formula: ${formula}`);
-
-        const numberOfDice = parseInt(pieces[0]);
-        if (isNaN(numberOfDice)) throw new Error(`Invalid dice formula: ${formula}`);
-
-        const diceFaces = parseInt(pieces[1]);
-        if (isNaN(diceFaces)) throw new Error(`Invalid dice formula: ${formula}`);
-
-        return [
-            new DiceFormulaPart({
-                numberOfDice: numberOfDice,
-                diceFaces: diceFaces
+        if (individualRolls === null) throw new Error(`Invalid dice formula: ${formula}`);
+        else if (individualRolls.length === 0) return [];
+        else {
+            individualRolls.forEach(roll => {
+                result.push(DiceFormulaPart.parse(roll));
             })
-        ];
+        }
+        return result;
     }
+
+
 
     static create(props: DiceFormulaProps): DiceFormula {
         return new DiceFormula(props);

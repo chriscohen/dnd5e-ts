@@ -1,4 +1,4 @@
-﻿import {ActorAbilityScores, type AbilitiesProps} from "~/AbilityScore/ActorAbilityScores";
+﻿import {ActorAbilityScores, type AbilitiesProps} from "~/Actor/ActorAbilityScores";
 import ArmorClass from "~/ArmorClass";
 
 export type ActorProps = {

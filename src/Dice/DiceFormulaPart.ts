@@ -21,8 +21,32 @@ export class DiceFormulaPart {
         return this.lastResult !== undefined;
     }
 
+    get max(): number {
+        return this.diceFaces * this.numberOfDice + this.modifier;
+    }
+
+    get min(): number {
+        return this.numberOfDice + this.modifier;
+    }
+
     get n(): number {
         return this.numberOfDice;
+    }
+
+    static parse(formula: string): DiceFormulaPart {
+        const matches = formula.match(/^(\d+)?d(\d+)(?:\s*([+-]\d+))?$/i);
+
+        if (!matches) throw new Error(`Invalid dice formula: ${formula}`);
+
+        // The number of dice might be missing, so we default to 1. Same with modifier, which defaults to 0.
+        if (!matches[1]) matches[1] = '1';
+        if (!matches[3]) matches[3] = '0';
+
+        return new DiceFormulaPart({
+            numberOfDice: parseInt(matches[1]),
+            diceFaces: parseInt(matches[2]),
+            modifier: parseInt(matches[3])
+        });
     }
 
     get roll(): DiceResult {
