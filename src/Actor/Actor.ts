@@ -1,29 +1,7 @@
-﻿import {ActorAbilityScores, type AbilitiesProps} from "~/Actor/ActorAbilityScores";
-import {ArmorClass} from "~/ArmorClass";
-import {ActorHitPoints} from "~/Actor/ActorHitPoints";
-import {ActorMovementSpeeds} from "~/MovementSpeed/ActorMovementSpeeds";
-
-export type ActorProps = {
-    abilities?: AbilitiesProps;
-    armorClass?: ArmorClass;
-    hitPoints?: ActorHitPoints;
-    movementSpeeds?: ActorMovementSpeeds;
-};
+﻿import {ActorName} from "~/Actor/ActorName";
+import {ActorType} from "~/Actor/ActorType";
 
 export class Actor {
-    abilities: ActorAbilityScores;
-    armorClass: ArmorClass;
-    hitPoints: ActorHitPoints;
-    movementSpeeds: ActorMovementSpeeds;
-
-    constructor(props?: ActorProps) {
-        this.abilities = ActorAbilityScores.create(props?.abilities);
-        this.armorClass = props?.armorClass ?? new ArmorClass();
-        this.hitPoints = props?.hitPoints ?? new ActorHitPoints();
-        this.movementSpeeds = props?.movementSpeeds ?? new ActorMovementSpeeds();
-    }
-
-    static create(props: ActorProps): Actor {
-        return new Actor(props);
-    }
+    name?: ActorName;
+    type?: ActorType;
 }
