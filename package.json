@@ -8,8 +8,14 @@
     "coverage": "vitest run --coverage"
   },
   "devDependencies": {
+    "@eslint/json": "^0.14.0",
+    "@eslint/markdown": "^7.5.1",
     "@types/node": "^24.10.1",
+    "eslint": "^9.39.1",
+    "globals": "^16.5.0",
+    "jiti": "^2.6.1",
     "tsconfig-paths": "^4.2.0",
+    "typescript-eslint": "^8.48.1",
     "vitest": "^4.0.15"
   }
 }
