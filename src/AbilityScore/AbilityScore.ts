@@ -1,6 +1,6 @@
-﻿import {AbilityType} from "~/classes/enums";
-import {DEFAULT_ABILITY_SCORE} from "~/utils/utils";
-import type {FormatBonusProps} from "~/classes/types";
+﻿import {AbilityType} from "~/enums";
+import {DEFAULT_ABILITY_SCORE} from "~/constants";
+import type {FormatBonusProps} from "~/types";
 
 export type AbilityScoreProps = {
     base?: number;

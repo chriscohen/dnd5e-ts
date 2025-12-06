@@ -1,4 +1,4 @@
-﻿import type {DiceFormulaPart} from "~/classes/Dice/DiceFormulaPart";
+﻿import type {DiceFormulaPart} from "~/Dice/DiceFormulaPart";
 
 export type DiceFormulaProps = {
     parts?: DiceFormulaPart[];

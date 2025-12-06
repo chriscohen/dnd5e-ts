@@ -1,5 +1,5 @@
-﻿import {AbilityScore, type AbilityScoreProps} from "~/classes/AbilityScore/AbilityScore";
-import {AbilityType} from "~/classes/enums";
+﻿import {AbilityScore, type AbilityScoreProps} from "~/AbilityScore/AbilityScore";
+import {AbilityType} from "~/enums";
 
 export type AbilitiesProps = {
     str: number | AbilityScoreProps;

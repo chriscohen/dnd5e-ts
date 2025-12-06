@@ -1,0 +1,1 @@
+﻿export const DEFAULT_ABILITY_SCORE = 10;

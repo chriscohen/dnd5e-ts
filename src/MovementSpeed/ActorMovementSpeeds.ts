@@ -1,5 +1,5 @@
-﻿import {MovementSpeed} from "~/classes/MovementSpeed/MovementSpeed";
-import {MovementType} from "~/classes/enums";
+﻿import {MovementSpeed} from "~/MovementSpeed/MovementSpeed";
+import {MovementType} from "~/enums";
 
 export type ActorMovementSpeedsProps = {
     burrow: number | MovementSpeed;
