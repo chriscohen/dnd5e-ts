@@ -25,5 +25,8 @@ export class ActorMovementSpeeds {
     }) {
         this.burrow = MovementSpeed.create(props?.burrow);
         this.climb = MovementSpeed.create(props?.climb);
+        this.fly = MovementSpeed.create(props?.fly);
+        this.swim = MovementSpeed.create(props?.swim);
+        this.walk = MovementSpeed.create(props?.walk);
     }
 }

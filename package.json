@@ -19,6 +19,8 @@
     "vitest": "^4.0.15"
   },
   "dependencies": {
-    "random": "^5.4.1"
+    "date-fns": "^4.1.0",
+    "random": "^5.4.1",
+    "uuid": "^13.0.0"
   }
 }
