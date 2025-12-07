@@ -8,7 +8,7 @@
     "types": "dist/index.d.ts",
     "scripts": {
         "build": "node build-index.js && tsc",
-        "prepare": "npm run build",
+        "prepare-dev": "npm run build",
         "test": "vitest",
         "coverage": "vitest run --coverage"
     },
@@ -22,6 +22,7 @@
         "jiti": "^2.6.1",
         "tsconfig-paths": "^4.2.0",
         "typescript-eslint": "^8.48.1",
+        "vite-tsconfig-paths": "^5.1.4",
         "vitest": "^4.0.15"
     },
     "dependencies": {

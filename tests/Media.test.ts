@@ -11,5 +11,5 @@ test.each([
     directory: string | undefined,
     expected: string
 ) => {
-    expect(createMediaFromFilenameAndDirectory(filename, directory).url()).toBe(expected);
+    expect(createMediaFromFilenameAndDirectory(filename, directory ?? '').url()).toBe(expected);
 });

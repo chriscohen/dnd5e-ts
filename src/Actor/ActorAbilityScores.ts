@@ -23,3 +23,21 @@ export function createActorAbilityScores(data: ActorAbilityScores = {
         ...data,
     }
 }
+
+export function createActorAbilityScoresFromNumbers(
+    str: number,
+    dex: number,
+    con: number,
+    int: number,
+    wis: number,
+    cha: number
+): ActorAbilityScores {
+    return createActorAbilityScores({
+        str: createAbilityScore({base: str, type: AbilityType.STR}),
+        dex: createAbilityScore({base: dex, type: AbilityType.DEX}),
+        con: createAbilityScore({base: con, type: AbilityType.CON}),
+        int: createAbilityScore({base: int, type: AbilityType.INT}),
+        wis: createAbilityScore({base: wis, type: AbilityType.WIS}),
+        cha: createAbilityScore({base: cha, type: AbilityType.CHA})
+    });
+}

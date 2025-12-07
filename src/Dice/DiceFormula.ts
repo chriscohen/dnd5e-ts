@@ -14,7 +14,7 @@ export interface DiceFormula {
 export type DiceFormulaProps = Omit<DiceFormula, 'hasRolled' | 'max' | 'min' | 'roll'>;
 
 export function createDiceFormula(data: DiceFormulaProps = {lastResult: []}): DiceFormula {
-    const lastResult: DiceResult[] = [];
+    let lastResult: DiceResult[] = [];
     const parts: DiceFormulaPart[] = [];
 
     const hasRolled = (): boolean => {
@@ -42,6 +42,7 @@ export function createDiceFormula(data: DiceFormulaProps = {lastResult: []}): Di
             results.push(part.hasRolled() ? part.lastResult : []);
         });
 
+        lastResult = results;
         return results;
     }
 

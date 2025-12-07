@@ -1,5 +1,5 @@
 ﻿import {randomInt} from "node:crypto";
-import {DiceResult} from "~/Dice/DiceResult";
+import {createDiceResult, DiceResult} from "~/Dice/DiceResult";
 
 export interface DiceFormulaPart {
     hasRolled: () => boolean;
@@ -16,10 +16,10 @@ export interface DiceFormulaPart {
 export type DiceFormulaPartProps = Omit<DiceFormulaPart, 'hasRolled' | 'max' | 'min' | 'roll'>;
 
 export function createDiceFormulaPart(data: DiceFormulaPartProps = {}): DiceFormulaPart {
-    const diceFaces: number = 6;
-    let lastResult: DiceResult | undefined;
-    const modifier: number = 0;
-    const numberOfDice: number = 1;
+    const diceFaces: number = data.diceFaces ?? 6;
+    let lastResult: DiceResult | undefined = data.lastResult ?? undefined;
+    const modifier: number = data.modifier ?? 0;
+    const numberOfDice: number = data.numberOfDice ?? 1;
 
     const hasRolled = (): boolean => {
         return lastResult !== undefined;
@@ -33,11 +33,11 @@ export function createDiceFormulaPart(data: DiceFormulaPartProps = {}): DiceForm
 
     const roll = (): DiceResult => {
         const rolls = Array(numberOfDice).fill(0).map(() => randomInt(1, diceFaces));
-        lastResult = {
+        lastResult = createDiceResult({
             rolls: rolls,
             modifier: modifier,
             total: rolls.reduce((a, b) => a + b, 0) + modifier
-        };
+        });
         return lastResult;
     }
 

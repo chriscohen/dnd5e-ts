@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createAbilityScore = createAbilityScore;
+exports.createAbilityScoreFromNumber = createAbilityScoreFromNumber;
 const enums_1 = require("~/enums");
 const constants_1 = require("~/constants");
 function createAbilityScore(data = {}) {
@@ -36,4 +37,7 @@ function createAbilityScore(data = {}) {
         format,
         name
     };
+}
+function createAbilityScoreFromNumber(value, type) {
+    return createAbilityScore({ base: value, type: type });
 }

@@ -49,3 +49,6 @@ export function createAbilityScore(data: AbilityScoreProps = {}): AbilityScore {
         name
     }
 }
+export function createAbilityScoreFromNumber(value: number, type: AbilityType): AbilityScore {
+    return createAbilityScore({base: value, type: type});
+}

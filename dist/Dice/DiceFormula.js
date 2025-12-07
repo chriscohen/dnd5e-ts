@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.createDiceFormula = createDiceFormula;
 exports.parseDiceFormula = parseDiceFormula;
 const DiceFormulaPart_1 = require("~/Dice/DiceFormulaPart");
-function createDiceFormula(data) {
+function createDiceFormula(data = { lastResult: [] }) {
     const lastResult = [];
     const parts = [];
     const hasRolled = () => {
@@ -30,6 +30,7 @@ function createDiceFormula(data) {
     };
     return {
         ...data,
+        hasRolled,
         max,
         min,
         roll
@@ -42,11 +43,13 @@ function parseDiceFormula(formula) {
     if (individualRolls === null)
         throw new Error(`Invalid dice formula: ${formula}`);
     else if (individualRolls.length === 0)
-        return [];
+        throw new Error(`Invalid dice formula: ${formula}`);
     else {
         individualRolls.forEach(roll => {
             result.push((0, DiceFormulaPart_1.parseDiceFormulaPart)(roll));
         });
     }
-    return result;
+    const output = createDiceFormula();
+    output.parts = result;
+    return output;
 }

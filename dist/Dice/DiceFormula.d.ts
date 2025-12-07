@@ -8,6 +8,7 @@ export interface DiceFormula {
     parts?: DiceFormulaPart[];
     lastResult: DiceResult[];
 }
-export declare function createDiceFormula(data: DiceFormula): DiceFormula;
-export declare function parseDiceFormula(formula: string): DiceFormulaPart[];
+export type DiceFormulaProps = Omit<DiceFormula, 'hasRolled' | 'max' | 'min' | 'roll'>;
+export declare function createDiceFormula(data?: DiceFormulaProps): DiceFormula;
+export declare function parseDiceFormula(formula: string): DiceFormula;
 //# sourceMappingURL=DiceFormula.d.ts.map

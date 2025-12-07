@@ -1,21 +1,18 @@
-﻿export type DiceResultProps = {
+﻿export interface DiceResult {
     total?: number;
     rolls?: number[];
     modifier?: number;
 }
 
-export class DiceResult {
-    total: number = 0;
-    rolls: number[] = [];
-    modifier: number = 0;
+export function createDiceResult(data: DiceResult = {}): DiceResult {
+    const total: number = data.total ?? 0;
+    const rolls: number[] = data.rolls ?? [];
+    const modifier: number = data.modifier ?? 0;
 
-    constructor(props: DiceResultProps = {}) {
-        this.total = props.total ?? 0;
-        this.rolls = props.rolls ?? [];
-        this.modifier = props.modifier ?? 0;
-    }
-
-    static create(props: DiceResultProps): DiceResult {
-        return new DiceResult(props);
+    return {
+        ...data,
+        total,
+        rolls,
+        modifier
     }
 }
