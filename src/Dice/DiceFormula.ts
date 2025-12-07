@@ -11,7 +11,9 @@ export interface DiceFormula {
     lastResult: DiceResult[];
 }
 
-export function createDiceFormula(data: DiceFormula): DiceFormula {
+export type DiceFormulaProps = Omit<DiceFormula, 'hasRolled' | 'max' | 'min' | 'roll'>;
+
+export function createDiceFormula(data: DiceFormulaProps = {lastResult: []}): DiceFormula {
     const lastResult: DiceResult[] = [];
     const parts: DiceFormulaPart[] = [];
 
@@ -45,23 +47,26 @@ export function createDiceFormula(data: DiceFormula): DiceFormula {
 
     return {
         ...data,
+        hasRolled,
         max,
         min,
         roll
     }
 }
 
-export function parseDiceFormula(formula: string): DiceFormulaPart[] {
+export function parseDiceFormula(formula: string): DiceFormula {
     const result: DiceFormulaPart[] = [];
     formula = formula.replace(/\s/g, '');
     const individualRolls = formula.split(/[=\-]/);
 
     if (individualRolls === null) throw new Error(`Invalid dice formula: ${formula}`);
-    else if (individualRolls.length === 0) return [];
+    else if (individualRolls.length === 0) throw new Error(`Invalid dice formula: ${formula}`);
     else {
         individualRolls.forEach(roll => {
             result.push(parseDiceFormulaPart(roll));
         })
     }
-    return result;
+    const output = createDiceFormula();
+    output.parts = result;
+    return output;
 }
