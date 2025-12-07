@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UnitsTime = exports.UnitsMetric = exports.UnitsImperial = exports.SourcebookType = exports.SourceType = exports.SourcebookFormat = exports.PublicationType = exports.MovementType = exports.GameEditionEnum = exports.CreatureType = exports.DataFileType = exports.CreatureSize = exports.Binding = exports.AlignmentGoodEvil = exports.AlignmentLawChaos = exports.AbilityType = void 0;
+exports.UnitsTime = exports.UnitsMetric = exports.UnitsImperial = exports.SourcebookType = exports.SourceType = exports.SourcebookFormat = exports.PublicationType = exports.MovementType = exports.GameEditionEnum = exports.DataFileType = exports.CreatureType = exports.CreatureSize = exports.Binding = exports.AlignmentGoodEvil = exports.AlignmentLawChaos = exports.AbilityType = void 0;
 var AbilityType;
 (function (AbilityType) {
     AbilityType[AbilityType["STR"] = 0] = "STR";
@@ -40,11 +40,6 @@ var CreatureSize;
     CreatureSize[CreatureSize["HUGE"] = 4] = "HUGE";
     CreatureSize[CreatureSize["GARGANTUAN"] = 5] = "GARGANTUAN";
 })(CreatureSize || (exports.CreatureSize = CreatureSize = {}));
-var DataFileType;
-(function (DataFileType) {
-    DataFileType["JSON"] = "json";
-    DataFileType["YAML"] = "yml";
-})(DataFileType || (exports.DataFileType = DataFileType = {}));
 var CreatureType;
 (function (CreatureType) {
     CreatureType[CreatureType["ABERRATION"] = 0] = "ABERRATION";
@@ -62,6 +57,11 @@ var CreatureType;
     CreatureType[CreatureType["PLANT"] = 12] = "PLANT";
     CreatureType[CreatureType["UNDEAD"] = 13] = "UNDEAD";
 })(CreatureType || (exports.CreatureType = CreatureType = {}));
+var DataFileType;
+(function (DataFileType) {
+    DataFileType["JSON"] = "json";
+    DataFileType["YAML"] = "yml";
+})(DataFileType || (exports.DataFileType = DataFileType = {}));
 var GameEditionEnum;
 (function (GameEditionEnum) {
     GameEditionEnum[GameEditionEnum["ZERO"] = 1] = "ZERO";

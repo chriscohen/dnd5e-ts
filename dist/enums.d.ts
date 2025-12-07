@@ -32,10 +32,6 @@ export declare enum CreatureSize {
     HUGE = 4,
     GARGANTUAN = 5
 }
-export declare enum DataFileType {
-    JSON = "json",
-    YAML = "yml"
-}
 export declare enum CreatureType {
     ABERRATION = 0,
     BEAST = 1,
@@ -51,6 +47,10 @@ export declare enum CreatureType {
     OOZE = 11,
     PLANT = 12,
     UNDEAD = 13
+}
+export declare enum DataFileType {
+    JSON = "json",
+    YAML = "yml"
 }
 export declare enum GameEditionEnum {
     ZERO = 1,

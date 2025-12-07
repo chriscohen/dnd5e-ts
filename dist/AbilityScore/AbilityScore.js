@@ -4,23 +4,26 @@ exports.createAbilityScore = createAbilityScore;
 exports.createAbilityScoreFromNumber = createAbilityScoreFromNumber;
 const enums_1 = require("../enums");
 const constants_1 = require("../constants");
-function createAbilityScore(data = {}) {
-    const value = constants_1.DEFAULT_ABILITY_SCORE;
-    const bonus = () => {
-        return Math.floor((value - 10) / 2);
-    };
-    const format = (showPlusForZero = true) => {
+function createAbilityScore(data = { base: constants_1.DEFAULT_ABILITY_SCORE }) {
+    const initialBase = data.base ?? constants_1.DEFAULT_ABILITY_SCORE;
+    const initialType = data.type ?? enums_1.AbilityType.STR;
+    function getBonus() {
+        return Math.floor((this?.base - 10) / 2);
+    }
+    ;
+    function format(showPlusForZero = true) {
         let sign;
-        const b = bonus();
-        if (b == 0) {
+        const bonus = this.getBonus();
+        if (bonus == 0) {
             sign = showPlusForZero ? '+' : '';
         }
         else {
-            sign = b > 0 ? '+' : '-';
+            sign = bonus > 0 ? '+' : '-';
         }
-        return `${value} (${sign}${Math.abs(b)})`;
-    };
-    const name = () => {
+        return `${this.base} (${sign}${Math.abs(bonus)})`;
+    }
+    ;
+    const getName = () => {
         switch (data.type) {
             default:
             case enums_1.AbilityType.STR: return 'Strength';
@@ -32,10 +35,11 @@ function createAbilityScore(data = {}) {
         }
     };
     return {
-        ...data,
-        bonus,
+        getBonus,
         format,
-        name
+        getName,
+        base: initialBase,
+        type: initialType
     };
 }
 function createAbilityScoreFromNumber(value, type) {
