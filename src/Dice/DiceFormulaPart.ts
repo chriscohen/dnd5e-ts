@@ -1,71 +1,75 @@
 ﻿import {randomInt} from "node:crypto";
 import {DiceResult} from "~/Dice/DiceResult";
 
-export type DiceFormulaPartProps = {
+export interface DiceFormulaPart {
+    hasRolled: () => boolean;
+    max: () => number;
+    min: () => number;
+    roll: () => DiceResult;
+
     diceFaces?: number;
     numberOfDice?: number;
+    lastResult?: DiceResult;
     modifier?: number;
 }
 
-export class DiceFormulaPart {
-    diceFaces: number = 6;
-    numberOfDice: number = 1;
-    modifier: number = 0;
-    lastResult: DiceResult | undefined;
+export type DiceFormulaPartProps = Omit<DiceFormulaPart, 'hasRolled' | 'max' | 'min' | 'roll'>;
 
-    get f(): number {
-        return this.diceFaces;
+export function createDiceFormulaPart(data: DiceFormulaPartProps = {}): DiceFormulaPart {
+    const diceFaces: number = 6;
+    let lastResult: DiceResult | undefined;
+    const modifier: number = 0;
+    const numberOfDice: number = 1;
+
+    const hasRolled = (): boolean => {
+        return lastResult !== undefined;
+    };
+    const max = (): number => {
+        return diceFaces * numberOfDice + modifier;
+    };
+    const min = (): number => {
+        return numberOfDice + modifier;
     }
 
-    get hasRolled(): boolean {
-        return this.lastResult !== undefined;
-    }
-
-    get max(): number {
-        return this.diceFaces * this.numberOfDice + this.modifier;
-    }
-
-    get min(): number {
-        return this.numberOfDice + this.modifier;
-    }
-
-    get n(): number {
-        return this.numberOfDice;
-    }
-
-    static parse(formula: string): DiceFormulaPart {
-        const matches = formula.match(/^(\d+)?d(\d+)(?:\s*([+-]\d+))?$/i);
-
-        if (!matches) throw new Error(`Invalid dice formula: ${formula}`);
-
-        // The number of dice might be missing, so we default to 1. Same with modifier, which defaults to 0.
-        if (!matches[1]) matches[1] = '1';
-        if (!matches[3]) matches[3] = '0';
-
-        return new DiceFormulaPart({
-            numberOfDice: parseInt(matches[1]),
-            diceFaces: parseInt(matches[2]),
-            modifier: parseInt(matches[3])
-        });
-    }
-
-    get roll(): DiceResult {
-        const rolls = Array(this.numberOfDice).fill(0).map(() => randomInt(1, this.diceFaces));
-        this.lastResult = new DiceResult({
+    const roll = (): DiceResult => {
+        const rolls = Array(numberOfDice).fill(0).map(() => randomInt(1, diceFaces));
+        lastResult = {
             rolls: rolls,
-            modifier: this.modifier,
-            total: rolls.reduce((a, b) => a + b, 0) + this.modifier
-        });
-        return this.lastResult;
+            modifier: modifier,
+            total: rolls.reduce((a, b) => a + b, 0) + modifier
+        };
+        return lastResult;
     }
 
-    constructor(props: DiceFormulaPartProps = {}) {
-        this.diceFaces = props.diceFaces ?? 6;
-        this.numberOfDice = props.numberOfDice ?? 1;
-        this.modifier = props.modifier ?? 0;
-    }
+    return {
+        ...data,
 
-    static create(props: DiceFormulaPartProps): DiceFormulaPart {
-        return new DiceFormulaPart(props);
+        // Methods.
+        hasRolled,
+        max,
+        min,
+        roll,
+
+        // Properties.
+        diceFaces,
+        lastResult,
+        modifier,
+        numberOfDice
     }
+}
+
+export function parseDiceFormulaPart(formula: string): DiceFormulaPart {
+    const matches = formula.match(/^(\d+)?d(\d+)(?:\s*([+-]\d+))?$/i);
+
+    if (!matches) throw new Error(`Invalid dice formula: ${formula}`);
+
+    // The number of dice might be missing, so we default to 1. Same with modifier, which defaults to 0.
+    if (!matches[1]) matches[1] = '1';
+    if (!matches[3]) matches[3] = '0';
+
+    return createDiceFormulaPart({
+        numberOfDice: parseInt(matches[1]),
+        diceFaces: parseInt(matches[2]),
+        modifier: parseInt(matches[3])
+    });
 }

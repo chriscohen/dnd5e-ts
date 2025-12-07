@@ -10,10 +10,10 @@ export interface Media {
 export function createMedia(data: Media = {}) {
     const instance = {
         url(): string {
-            if (this.directory) {
-                return CDN_URL + this.directory + '/' + this._url;
+            if (data.directory) {
+                return CDN_URL + data.directory + '/' + data._url;
             } else {
-                return CDN_URL + this._url;
+                return CDN_URL + data._url;
             }
         }
     }

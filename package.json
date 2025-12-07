@@ -1,26 +1,33 @@
 {
-  "name": "dnd5e-ts",
-  "description": "A library for handing Dungeons & Dragons 5th Edition data in TypeScript.",
-  "version": "0.0.1",
-  "author": "fw190a8 <info@fw190a8.com>",
-  "scripts": {
-    "test": "vitest",
-    "coverage": "vitest run --coverage"
-  },
-  "devDependencies": {
-    "@eslint/json": "^0.14.0",
-    "@eslint/markdown": "^7.5.1",
-    "@types/node": "^24.10.1",
-    "eslint": "^9.39.1",
-    "globals": "^16.5.0",
-    "jiti": "^2.6.1",
-    "tsconfig-paths": "^4.2.0",
-    "typescript-eslint": "^8.48.1",
-    "vitest": "^4.0.15"
-  },
-  "dependencies": {
-    "date-fns": "^4.1.0",
-    "random": "^5.4.1",
-    "uuid": "^13.0.0"
-  }
+    "name": "dnd5e-ts",
+    "description": "A library for handing Dungeons & Dragons 5th Edition data in TypeScript.",
+    "version": "0.0.1",
+    "author": "fw190a8 <info@fw190a8.com>",
+    "type": "module",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "scripts": {
+        "build": "node build-index.js && tsc",
+        "prepare": "npm run build",
+        "test": "vitest",
+        "coverage": "vitest run --coverage"
+    },
+    "devDependencies": {
+        "@eslint/json": "^0.14.0",
+        "@eslint/markdown": "^7.5.1",
+        "@types/node": "^24.10.1",
+        "barrelsby": "^2.8.1",
+        "eslint": "^9.39.1",
+        "globals": "^16.5.0",
+        "jiti": "^2.6.1",
+        "tsconfig-paths": "^4.2.0",
+        "typescript-eslint": "^8.48.1",
+        "vitest": "^4.0.15"
+    },
+    "dependencies": {
+        "axios": "^1.13.2",
+        "date-fns": "^4.1.0",
+        "random": "^5.4.1",
+        "uuid": "^13.0.0"
+    }
 }

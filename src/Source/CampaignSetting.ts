@@ -1,18 +1,34 @@
-﻿import {Slugifier} from "~/utils";
-import {Media} from "~/Media/Media";
+﻿import {Media} from "~/Media/Media";
 import {Company} from "~/Source/Company";
 import {PublicationType} from "~/enums";
+import {makeSlug} from "~/utils";
 
-export class CampaignSetting {
+export interface CampaignSetting {
+    getSlug: () => string;
+
     id?: string;
-    _slug?: string;
+    slug?: string;
     logo?: Media;
     publicationType?: PublicationType;
     publisher?: Company;
-    name?: string;
+    name: string;
     shortName?: string;
+}
 
-    get slug(): string {
-        return this._slug ?? Slugifier.slugify(this.name);
+export type CampaignSettingProps = Omit<CampaignSetting, 'getSlug'>;
+
+export function createCampaignSetting(data: CampaignSettingProps): CampaignSetting {
+    const name: string = data.name;
+    const slug: string | undefined = data.slug;
+
+    const getSlug = (): string => {
+        return slug ?? makeSlug(name);
+    }
+
+    return {
+        ...data,
+        getSlug,
+        name,
+        slug
     }
 }

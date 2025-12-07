@@ -1,4 +1,4 @@
-﻿import {GameEdition as GameEditionEnum} from "~/enums";
+﻿import {GameEditionEnum as GameEditionEnum} from "~/enums";
 
 export interface GameEdition {
     fullName?: string
@@ -66,6 +66,7 @@ export function createGameEditionFromText(input: string): GameEdition {
         case '5e (2024)':
         case '2024':
         case '5.5 edition':
+        default:
             return createGameEditionFromEnum(GameEditionEnum.FPF);
     }
 }

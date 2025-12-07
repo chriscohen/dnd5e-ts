@@ -6,6 +6,4 @@
 export class ActorName {
     first?: string;
     last?: string;
-
-    constuc
 }

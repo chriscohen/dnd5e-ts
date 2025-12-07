@@ -1,14 +1,29 @@
 ﻿import {Media} from "~/Media/Media";
 
-export class Company {
+export interface Company {
+    getProductUrl: () => string | undefined;
+
     id?: string;
     logo?: Media;
     name?: string;
-    _productUrl?: string;
+    productUrl?: string;
     shortName?: string;
     website?: string;
+}
 
-    get productUrl(): string {
-        return this._productUrl ?? this.website;
+export type CompanyProps = Partial<Company>;
+
+export function createCompany(data: CompanyProps = {}): Company {
+    const productUrl: string | undefined = data.productUrl;
+    const website: string | undefined = data.website;
+
+    const getProductUrl = (): string | undefined => {
+        return productUrl ?? website ?? undefined;
+    }
+
+    return {
+        ...data,
+        getProductUrl,
+        website
     }
 }

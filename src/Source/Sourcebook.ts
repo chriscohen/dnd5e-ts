@@ -1,7 +1,7 @@
 ﻿import {CampaignSetting} from "~/Source/CampaignSetting";
 import {createMediaFromFilenameAndDirectory, Media} from "~/Media/Media";
 import {SourcebookEdition} from "~/Source/SourcebookEdition";
-import {GameEdition, PublicationType, SourcebookType, SourceType} from "~/enums";
+import {GameEditionEnum, PublicationType, SourcebookType, SourceType} from "~/enums";
 import {Company} from "~/Source/Company";
 import {getImportExportableMethods, ImportExportable} from "~/Mixins/ImportExport";
 import {Fileable, getFileableMethods} from "~/Mixins/Fileable";
@@ -14,7 +14,7 @@ export interface Sourcebook {
     coverImage?: Media;
     description?: string;
     editions?: SourcebookEdition[];
-    gameEdition?: GameEdition;
+    gameEdition?: GameEditionEnum;
     name?: string;
     productCode?: string;
     productIds?: string[];

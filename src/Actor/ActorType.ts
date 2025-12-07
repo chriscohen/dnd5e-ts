@@ -1,29 +1,20 @@
-﻿import {ActorAbilityScores, type AbilitiesProps} from "~/Actor/ActorAbilityScores";
+﻿import {ActorAbilityScores} from "~/Actor/ActorAbilityScores";
 import {ArmorClass} from "~/ArmorClass";
 import {ActorHitPoints} from "~/Actor/ActorHitPoints";
 import {ActorMovementSpeeds} from "~/MovementSpeed/ActorMovementSpeeds";
 
-export type ActorProps = {
-    abilities?: AbilitiesProps;
+export interface ActorType {
+    abilities?: ActorAbilityScores;
     armorClass?: ArmorClass;
     hitPoints?: ActorHitPoints;
     movementSpeeds?: ActorMovementSpeeds;
-};
+}
 
-export class ActorType {
-    abilities: ActorAbilityScores;
-    armorClass: ArmorClass;
-    hitPoints: ActorHitPoints;
-    movementSpeeds: ActorMovementSpeeds;
+export function createActorType(data: ActorType = {}): ActorType {
+    const instance = {}
 
-    constructor(props?: ActorProps) {
-        this.abilities = ActorAbilityScores.create(props?.abilities);
-        this.armorClass = props?.armorClass ?? new ArmorClass();
-        this.hitPoints = props?.hitPoints ?? new ActorHitPoints();
-        this.movementSpeeds = props?.movementSpeeds ?? new ActorMovementSpeeds();
-    }
-
-    static create(props: ActorProps): ActorType {
-        return new ActorType(props);
+    return {
+        ...data,
+        ...instance
     }
 }

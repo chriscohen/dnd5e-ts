@@ -2,8 +2,8 @@
  * Interface for classes that can be imported from JSON or YAML.
  */
 export interface ImportExportable<T> {
-    fromJson(json: string);
-    fromYaml(yaml: string);
+    fromJson(json: string): any;
+    fromYaml(yaml: string): any;
     toJson(): string;
     toYaml(): string;
 }

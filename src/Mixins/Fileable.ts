@@ -13,7 +13,7 @@ export function getFileableMethods<T>() {
         fromFileSync(this: T, path: string): any {
             try {
                 return fs.readFileSync(path, 'utf8');
-            } catch (error) {
+            } catch (error: any) {
                 console.error(`There was an error reading the file at ${path}`, error.message);
                 return false;
             }

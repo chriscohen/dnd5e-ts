@@ -1,0 +1,83 @@
+﻿import {FeArmorClass} from "~/FeTools/Types/FeArmorClass";
+import {FeResistance} from "~/FeTools/Types/FeResistance";
+import {FeTrait} from "~/FeTools/Types/FeTrait";
+
+export type Monster = {
+    name?: string;
+    isNpc?: boolean;
+    isNamedCreature?: boolean;
+    source?: string;
+    page?: number;
+    size?: string[];
+    type?: {
+        type?: string;
+        tags?: string[];
+    },
+    alignment?: string[];
+    ac?: FeArmorClass[];
+    hp?: {
+        average?: number;
+        formula?: string;
+    }
+    speed?: {
+        burrow?: number,
+        climb?: number,
+        fly?: number,
+        swim?: number,
+        walk?: number
+    },
+    str?: number;
+    dex?: number;
+    con?: number;
+    int?: number;
+    wis?: number;
+    cha?: number;
+    save: {
+        str?: string;
+        dex?: string;
+        con?: string;
+        int?: string;
+        wis?: string;
+        cha?: string;
+    },
+    skill?: {
+        acrobatics?: string;
+        "animal handling"?: string;
+        arcana?: string;
+        athletics?: string;
+        deception?: string;
+        history?: string;
+        insight?: string;
+        intimidation?: string;
+        investigation?: string;
+        medicine?: string;
+        nature?: string;
+        perception?: string;
+        performance?: string;
+        persuasion?: string;
+        religion?: string;
+        sleightOfHand?: string;
+        stealth?: string;
+    },
+    senses?: string[],
+    passive?: number,
+    resist?: string[] | FeResistance[]
+    immune?: string[],
+    conditionImmune?: string[],
+    language?: string[],
+    cr?: number,
+    trait: FeTrait[];
+    action?: FeTrait[];
+    legendary?: FeTrait[];
+    tokenCredit?: string;
+    attachedItems?: string[];
+    traitTags?: string[];
+    senseTags?: string[];
+    actionTags?: string[];
+    languageTags?: string[];
+    damageTags?: string[];
+    miscTags?: string[];
+    savingThrowForced?: string;
+    hasToken?: boolean;
+    hasFluffImages?: boolean;
+};

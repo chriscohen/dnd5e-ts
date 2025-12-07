@@ -59,7 +59,7 @@ export enum CreatureType {
     UNDEAD
 }
 
-export enum GameEdition {
+export enum GameEditionEnum {
     ZERO = 1,
     FIRST = 2,
     SECOND = 3,

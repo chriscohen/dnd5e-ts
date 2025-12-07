@@ -1,58 +1,25 @@
-﻿import {AbilityScore, type AbilityScoreProps} from "~/AbilityScore/AbilityScore";
+﻿import {AbilityScore, createAbilityScore} from "~/AbilityScore/AbilityScore";
 import {AbilityType} from "~/enums";
+import {DEFAULT_ABILITY_SCORE} from "~/constants";
 
-export type AbilitiesProps = {
-    str: number | AbilityScoreProps;
-    dex: number | AbilityScoreProps;
-    con: number | AbilityScoreProps;
-    int: number | AbilityScoreProps;
-    wis: number | AbilityScoreProps;
-    cha: number | AbilityScoreProps;
-}
-
-export class ActorAbilityScores {
+export interface ActorAbilityScores {
     str: AbilityScore;
     dex: AbilityScore;
     con: AbilityScore;
     int: AbilityScore;
     wis: AbilityScore;
     cha: AbilityScore;
+}
 
-    constructor(
-        str?: number | AbilityScoreProps,
-        dex?: number | AbilityScoreProps,
-        con?: number | AbilityScoreProps,
-        int?: number | AbilityScoreProps,
-        wis?: number | AbilityScoreProps,
-        cha?: number | AbilityScoreProps
-    ) {
-        if (str === undefined) this.str = AbilityScore.create({type: AbilityType.STR})
-        else this.str = AbilityScore.create(str);
-
-        if (dex === undefined) this.dex = AbilityScore.create({type: AbilityType.DEX})
-        else this.dex = AbilityScore.create(dex);
-
-        if (con === undefined) this.con = AbilityScore.create({type: AbilityType.CON})
-        else this.con = AbilityScore.create(con);
-
-        if (int === undefined) this.int = AbilityScore.create({type: AbilityType.INT})
-        else this.int = AbilityScore.create(int);
-
-        if (wis === undefined) this.wis = AbilityScore.create({type: AbilityType.WIS})
-        else this.wis = AbilityScore.create(wis);
-
-        if (cha === undefined) this.cha = AbilityScore.create({type: AbilityType.CHA})
-        else this.cha = AbilityScore.create(cha);
-    }
-
-    static create(props: AbilitiesProps = {
-        str: 10,
-        dex: 10,
-        con: 10,
-        int: 10,
-        wis: 10,
-        cha: 10
-    }): ActorAbilityScores {
-        return new ActorAbilityScores(props.str, props.dex, props.con, props.int, props.wis, props.cha);
+export function createActorAbilityScores(data: ActorAbilityScores = {
+    str: createAbilityScore({base: DEFAULT_ABILITY_SCORE, type: AbilityType.STR}),
+    dex: createAbilityScore({base: DEFAULT_ABILITY_SCORE, type: AbilityType.DEX}),
+    con: createAbilityScore({base: DEFAULT_ABILITY_SCORE, type: AbilityType.CON}),
+    int: createAbilityScore({base: DEFAULT_ABILITY_SCORE, type: AbilityType.INT}),
+    wis: createAbilityScore({base: DEFAULT_ABILITY_SCORE, type: AbilityType.WIS}),
+    cha: createAbilityScore({base: DEFAULT_ABILITY_SCORE, type: AbilityType.CHA})
+}): ActorAbilityScores {
+    return {
+        ...data,
     }
 }

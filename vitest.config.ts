@@ -8,6 +8,9 @@ export default defineConfig({
     }
   },
   test: {
-    include: ['tests/**/*.test.ts']
+    include: [
+        'tests/**/*.test.ts',
+        'src/FeTools/**/*.test.ts'
+    ]
   }
 });
