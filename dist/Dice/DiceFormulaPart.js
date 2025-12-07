@@ -27,6 +27,13 @@ function createDiceFormulaPart(data = {}) {
         });
         return lastResult;
     };
+    const toString = (includeModifier = true) => {
+        let output = `${numberOfDice}d${diceFaces}`;
+        if (includeModifier && modifier !== 0) {
+            output += modifier < 0 ? ' - ' + Math.abs(modifier) : ` + ${modifier}`;
+        }
+        return output;
+    };
     return {
         ...data,
         // Methods.
@@ -38,7 +45,8 @@ function createDiceFormulaPart(data = {}) {
         diceFaces,
         lastResult,
         modifier,
-        numberOfDice
+        numberOfDice,
+        toString
     };
 }
 function parseDiceFormulaPart(formula) {

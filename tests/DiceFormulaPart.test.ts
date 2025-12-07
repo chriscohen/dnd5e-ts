@@ -53,3 +53,17 @@ test.each([
     expect(result.diceFaces).toBe(diceFaces);
     expect(result.modifier).toBe(modifier);
 })
+
+/**
+ * Test converting to string.
+ */
+test.each([
+    ['1d6', '1d6'],
+    ['1d6+2', '1d6 + 2'],
+    ['d6', '1d6'],
+    ['1d6-2', '1d6 - 2']
+])('Test %s is converted to %s', (input: string, expected: string) => {
+    const result = parseDiceFormulaPart(input);
+    console.log(result.toString());
+    expect(result.toString()).toBe(expected);
+})

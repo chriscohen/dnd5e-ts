@@ -6,7 +6,7 @@
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
     "scripts": {
-        "build": "node build-index.mjs && tsc",
+        "build": "node build-index.mjs && tsc && npm link",
         "prepare-dev": "npm run build",
         "test": "vitest",
         "coverage": "vitest run --coverage"

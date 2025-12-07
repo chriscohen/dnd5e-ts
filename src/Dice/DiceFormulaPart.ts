@@ -6,6 +6,7 @@ export interface DiceFormulaPart {
     max: () => number;
     min: () => number;
     roll: () => DiceResult;
+    toString: (includeModifier?: boolean) => string;
 
     diceFaces?: number;
     numberOfDice?: number;
@@ -41,6 +42,16 @@ export function createDiceFormulaPart(data: DiceFormulaPartProps = {}): DiceForm
         return lastResult;
     }
 
+    const toString = (includeModifier: boolean = true): string => {
+        let output: string = `${numberOfDice}d${diceFaces}`
+
+        if (includeModifier && modifier !== 0) {
+            output += modifier < 0 ? ' - ' + Math.abs(modifier) : ` + ${modifier}`;
+        }
+
+        return output;
+    }
+
     return {
         ...data,
 
@@ -54,7 +65,8 @@ export function createDiceFormulaPart(data: DiceFormulaPartProps = {}): DiceForm
         diceFaces,
         lastResult,
         modifier,
-        numberOfDice
+        numberOfDice,
+        toString
     }
 }
 

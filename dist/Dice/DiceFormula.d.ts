@@ -5,6 +5,7 @@ export interface DiceFormula {
     max: () => number;
     min: () => number;
     roll: () => DiceResult[];
+    toString: () => string;
     parts?: DiceFormulaPart[];
     lastResult: DiceResult[];
 }

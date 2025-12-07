@@ -1,10 +1,14 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ActorHitPoints = void 0;
-class ActorHitPoints {
-    constructor() {
-        this.average = 0;
-        this.current = 0;
-    }
+exports.createActorHitPoints = createActorHitPoints;
+function createActorHitPoints(data = {}) {
+    const average = data.average ?? 0;
+    const current = data.current ?? 0;
+    const formula = data.formula ?? undefined;
+    return {
+        ...data,
+        average,
+        current,
+        formula
+    };
 }
-exports.ActorHitPoints = ActorHitPoints;

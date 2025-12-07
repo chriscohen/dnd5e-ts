@@ -4,6 +4,7 @@ export interface DiceFormulaPart {
     max: () => number;
     min: () => number;
     roll: () => DiceResult;
+    toString: (includeModifier?: boolean) => string;
     diceFaces?: number;
     numberOfDice?: number;
     lastResult?: DiceResult;
