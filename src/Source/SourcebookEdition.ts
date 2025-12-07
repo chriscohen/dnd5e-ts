@@ -1,4 +1,4 @@
-﻿import {Binding, SourcebookFormat} from "~/enums";
+﻿import {Binding, SourcebookFormat} from "../enums";
 
 export interface SourcebookEdition {
     id?: string;

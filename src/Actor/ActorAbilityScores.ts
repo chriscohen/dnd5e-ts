@@ -1,6 +1,6 @@
-﻿import {AbilityScore, createAbilityScore} from "~/AbilityScore/AbilityScore";
-import {AbilityType} from "~/enums";
-import {DEFAULT_ABILITY_SCORE} from "~/constants";
+﻿import {AbilityScore, createAbilityScore} from "../AbilityScore/AbilityScore";
+import {AbilityType} from "../enums";
+import {DEFAULT_ABILITY_SCORE} from "../constants";
 
 export interface ActorAbilityScores {
     str: AbilityScore;

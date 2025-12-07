@@ -1,4 +1,4 @@
-﻿import {MovementType} from "~/enums";
+﻿import {MovementType} from "../enums";
 
 export type MovementSpeedProps = {
     type?: MovementType;

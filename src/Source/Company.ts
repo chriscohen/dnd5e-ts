@@ -1,4 +1,4 @@
-﻿import {Media} from "~/Media/Media";
+﻿import {Media} from "../Media/Media";
 
 export interface Company {
     getProductUrl: () => string | undefined;

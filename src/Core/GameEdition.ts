@@ -1,4 +1,4 @@
-﻿import {GameEditionEnum as GameEditionEnum} from "~/enums";
+﻿import {GameEditionEnum} from "../enums";
 
 export interface GameEdition {
     fullName?: string

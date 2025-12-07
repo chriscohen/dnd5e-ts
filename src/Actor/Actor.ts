@@ -1,5 +1,5 @@
-﻿import {ActorName} from "~/Actor/ActorName";
-import {ActorType} from "~/Actor/ActorType";
+﻿import {ActorName} from "./ActorName";
+import {ActorType} from "./ActorType";
 
 export interface Actor {
     name?: ActorName;

@@ -1,5 +1,5 @@
-﻿import {AbilityType} from "~/enums";
-import {DEFAULT_ABILITY_SCORE} from "~/constants";
+﻿import {AbilityType} from "../enums";
+import {DEFAULT_ABILITY_SCORE} from "../constants";
 
 export interface AbilityScore {
     bonus: () => number;

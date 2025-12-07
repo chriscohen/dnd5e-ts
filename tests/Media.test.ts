@@ -1,6 +1,6 @@
 ﻿import { expect, test } from 'vitest';
-import {CDN_URL} from "~/constants";
-import {createMediaFromFilenameAndDirectory} from "~/Media/Media";
+import {CDN_URL} from "../src";
+import {createMediaFromFilenameAndDirectory} from "../src";
 
 test.each([
     ['example.webp', 'exampleDirectoryName', CDN_URL + 'exampleDirectoryName/example.webp'],

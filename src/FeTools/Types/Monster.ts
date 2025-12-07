@@ -1,6 +1,6 @@
-﻿import {FeArmorClass} from "~/FeTools/Types/FeArmorClass";
-import {FeResistance} from "~/FeTools/Types/FeResistance";
-import {FeTrait} from "~/FeTools/Types/FeTrait";
+﻿import {FeArmorClass} from "./FeArmorClass";
+import {FeResistance} from "./FeResistance";
+import {FeTrait} from "./FeTrait";
 
 export type Monster = {
     name?: string;

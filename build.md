@@ -14,7 +14,7 @@
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
     "scripts": {
-      "build": "node build-index.js && tsc",
+      "build": "node build-index.mjs && tsc",
       "prepublishOnly": "npm run build"
     }
     ```

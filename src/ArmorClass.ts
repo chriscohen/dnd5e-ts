@@ -1,4 +1,4 @@
-﻿import {DEFAULT_ARMOR_CLASS} from "~/constants";
+﻿import {DEFAULT_ARMOR_CLASS} from "./constants";
 
 export type ArmorClassProps = {
     base?: number;

@@ -1,12 +1,12 @@
-﻿import {CampaignSetting} from "~/Source/CampaignSetting";
-import {createMediaFromFilenameAndDirectory, Media} from "~/Media/Media";
-import {SourcebookEdition} from "~/Source/SourcebookEdition";
-import {GameEditionEnum, PublicationType, SourcebookType, SourceType} from "~/enums";
-import {Company} from "~/Source/Company";
-import {getImportExportableMethods, ImportExportable} from "~/Mixins/ImportExport";
-import {Fileable, getFileableMethods} from "~/Mixins/Fileable";
-import {getSluggableMethods, Sluggable} from "~/Mixins/Sluggable";
-import {createGameEditionFromText} from "~/Core/GameEdition";
+﻿import {CampaignSetting} from "./CampaignSetting";
+import {createMediaFromFilenameAndDirectory, Media} from "../Media/Media";
+import {SourcebookEdition} from "./SourcebookEdition";
+import {GameEditionEnum, PublicationType, SourcebookType, SourceType} from "../enums";
+import {Company} from "./Company";
+import {getImportExportableMethods, ImportExportable} from "../Mixins/ImportExport";
+import {Fileable, getFileableMethods} from "../Mixins/Fileable";
+import {getSluggableMethods, Sluggable} from "../Mixins/Sluggable";
+import {createGameEditionFromText} from "../Core/GameEdition";
 
 export interface Sourcebook {
     id?: string;

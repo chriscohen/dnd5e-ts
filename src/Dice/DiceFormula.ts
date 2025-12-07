@@ -1,5 +1,5 @@
-﻿import {DiceFormulaPart, parseDiceFormulaPart} from "~/Dice/DiceFormulaPart";
-import {DiceResult} from "~/Dice/DiceResult";
+﻿import {DiceFormulaPart, parseDiceFormulaPart} from "./DiceFormulaPart";
+import {DiceResult} from "./DiceResult";
 
 export interface DiceFormula {
     hasRolled: () => boolean;

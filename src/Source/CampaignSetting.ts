@@ -1,7 +1,7 @@
-﻿import {Media} from "~/Media/Media";
-import {Company} from "~/Source/Company";
-import {PublicationType} from "~/enums";
-import {makeSlug} from "~/utils";
+﻿import {Media} from "../Media/Media";
+import {Company} from "./Company";
+import {PublicationType} from "../enums";
+import {makeSlug} from "../utils";
 
 export interface CampaignSetting {
     getSlug: () => string;

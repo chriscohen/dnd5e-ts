@@ -1,5 +1,5 @@
 ﻿import { expect, test } from 'vitest';
-import {makeSlug} from "~/utils";
+import {makeSlug} from "../src";
 
 test.each([
     ["Aurora's Whole Realms Catalogue", "auroras-whole-realms-catalogue"],

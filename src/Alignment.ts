@@ -1,4 +1,4 @@
-﻿import {AlignmentGoodEvil, AlignmentLawChaos} from "~/enums";
+﻿import {AlignmentGoodEvil, AlignmentLawChaos} from "./enums";
 
 export type AlignmentProps = {
     lawChaos?: AlignmentLawChaos;

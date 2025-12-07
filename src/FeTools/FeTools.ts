@@ -1,4 +1,4 @@
-﻿import {FE_TOOLS_URL} from "~/constants";
+﻿import {FE_TOOLS_URL} from "../constants";
 import axios from "axios";
 
 /**

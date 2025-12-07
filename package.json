@@ -3,11 +3,10 @@
     "description": "A library for handing Dungeons & Dragons 5th Edition data in TypeScript.",
     "version": "0.0.1",
     "author": "fw190a8 <info@fw190a8.com>",
-    "type": "module",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
     "scripts": {
-        "build": "node build-index.js && tsc",
+        "build": "node build-index.mjs && tsc",
         "prepare-dev": "npm run build",
         "test": "vitest",
         "coverage": "vitest run --coverage"
@@ -20,6 +19,7 @@
         "eslint": "^9.39.1",
         "globals": "^16.5.0",
         "jiti": "^2.6.1",
+        "madge": "^8.0.0",
         "tsconfig-paths": "^4.2.0",
         "typescript-eslint": "^8.48.1",
         "vite-tsconfig-paths": "^5.1.4",

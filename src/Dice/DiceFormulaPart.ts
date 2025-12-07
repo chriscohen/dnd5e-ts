@@ -1,5 +1,5 @@
 ﻿import {randomInt} from "node:crypto";
-import {createDiceResult, DiceResult} from "~/Dice/DiceResult";
+import {createDiceResult, DiceResult} from "./DiceResult";
 
 export interface DiceFormulaPart {
     hasRolled: () => boolean;

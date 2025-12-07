@@ -1,6 +1,5 @@
 ﻿import { expect, test } from 'vitest';
-import {getSlug} from "~/utils";
-import {createSourcebook} from "~/Source/Sourcebook";
+import {createSourcebook} from "../src/Source/Sourcebook";
 
 test('Import data from JSON', () => {
     const json = "{\n" +

@@ -1,4 +1,4 @@
-﻿import {CDN_URL} from "~/constants";
+﻿import {CDN_URL} from "../constants";
 
 export interface Media {
     directory?: string;

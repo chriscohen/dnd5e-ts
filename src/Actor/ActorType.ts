@@ -1,7 +1,7 @@
-﻿import {ActorAbilityScores} from "~/Actor/ActorAbilityScores";
-import {ArmorClass} from "~/ArmorClass";
-import {ActorHitPoints} from "~/Actor/ActorHitPoints";
-import {ActorMovementSpeeds} from "~/MovementSpeed/ActorMovementSpeeds";
+﻿import {ActorAbilityScores} from "./ActorAbilityScores";
+import {ArmorClass} from "../ArmorClass";
+import {ActorHitPoints} from "./ActorHitPoints";
+import {ActorMovementSpeeds} from "../MovementSpeed/ActorMovementSpeeds";
 
 export interface ActorType {
     abilities?: ActorAbilityScores;
