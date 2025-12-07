@@ -1,0 +1,1 @@
+{"version":3,"file":"DiceResult.d.ts","sourceRoot":"","sources":["../../src/Dice/DiceResult.ts"],"names":[],"mappings":"AAAA,MAAM,WAAW,UAAU;IACvB,KAAK,CAAC,EAAE,MAAM,CAAC;IACf,KAAK,CAAC,EAAE,MAAM,EAAE,CAAC;IACjB,QAAQ,CAAC,EAAE,MAAM,CAAC;CACrB;AAED,wBAAgB,gBAAgB,CAAC,IAAI,GAAE,UAAe,GAAG,UAAU,CAWlE"}
