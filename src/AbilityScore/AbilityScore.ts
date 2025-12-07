@@ -2,35 +2,36 @@
 import {DEFAULT_ABILITY_SCORE} from "../constants";
 
 export interface AbilityScore {
-    bonus: () => number;
+    getBonus: () => number;
     format: (showPlusForZero?: boolean) => string;
-    name: () => string;
+    getName: () => string;
 
-    base?: number;
+    base: number;
     type?: AbilityType;
 }
 
-type AbilityScoreProps = Omit<AbilityScore, 'bonus' | 'format' | 'name'>;
+type AbilityScoreProps = Omit<AbilityScore, 'getBonus' | 'format' | 'getName'>;
 
-export function createAbilityScore(data: AbilityScoreProps = {}): AbilityScore {
-    const value: number = DEFAULT_ABILITY_SCORE
+export function createAbilityScore(data: AbilityScoreProps = {base: DEFAULT_ABILITY_SCORE}): AbilityScore {
+    const initialBase: number = data.base ?? DEFAULT_ABILITY_SCORE
+    const initialType = data.type ?? AbilityType.STR;
 
-    const bonus = (): number => {
-        return Math.floor((value - 10) / 2);
+    function getBonus(this: AbilityScore): number {
+        return Math.floor((this?.base - 10) / 2);
     };
-    const format = (showPlusForZero: boolean = true): string => {
+    function format(this: AbilityScore, showPlusForZero: boolean = true): string {
         let sign;
-        const b = bonus();
+        const bonus = this.getBonus();
 
-        if (b == 0) {
+        if (bonus == 0) {
             sign = showPlusForZero ? '+' : '';
         } else {
-            sign = b > 0 ? '+' : '-';
+            sign = bonus > 0 ? '+' : '-';
         }
 
-        return `${value} (${sign}${Math.abs(b)})`;
+        return `${this.base} (${sign}${Math.abs(bonus)})`;
     };
-    const name = (): string => {
+    const getName = (): string => {
         switch (data.type) {
             default:
             case AbilityType.STR: return 'Strength';
@@ -43,10 +44,12 @@ export function createAbilityScore(data: AbilityScoreProps = {}): AbilityScore {
     };
 
     return {
-        ...data,
-        bonus,
+        getBonus,
         format,
-        name
+        getName,
+
+        base: initialBase,
+        type: initialType
     }
 }
 export function createAbilityScoreFromNumber(value: number, type: AbilityType): AbilityScore {
