@@ -7,33 +7,25 @@ const DiceResult_1 = require("./DiceResult");
 function createDiceFormulaPart(data = {}) {
     const diceFaces = data.diceFaces ?? 6;
     let lastResult = data.lastResult ?? undefined;
-    const modifier = data.modifier ?? 0;
     const numberOfDice = data.numberOfDice ?? 1;
     const hasRolled = () => {
         return lastResult !== undefined;
     };
     const max = () => {
-        return diceFaces * numberOfDice + modifier;
+        return diceFaces * numberOfDice;
     };
     const min = () => {
-        return numberOfDice + modifier;
+        return numberOfDice;
     };
     const roll = () => {
         const rolls = Array(numberOfDice).fill(0).map(() => (0, node_crypto_1.randomInt)(1, diceFaces));
         lastResult = (0, DiceResult_1.createDiceResult)({
             rolls: rolls,
-            modifier: modifier,
-            total: rolls.reduce((a, b) => a + b, 0) + modifier
+            total: rolls.reduce((a, b) => a + b, 0)
         });
         return lastResult;
     };
-    const toString = (includeModifier = true) => {
-        let output = `${numberOfDice}d${diceFaces}`;
-        if (includeModifier && modifier !== 0) {
-            output += modifier < 0 ? ' - ' + Math.abs(modifier) : ` + ${modifier}`;
-        }
-        return output;
-    };
+    const toString = () => `${numberOfDice}d${diceFaces}`;
     return {
         ...data,
         // Methods.
@@ -44,7 +36,6 @@ function createDiceFormulaPart(data = {}) {
         // Properties.
         diceFaces,
         lastResult,
-        modifier,
         numberOfDice,
         toString
     };
@@ -60,7 +51,6 @@ function parseDiceFormulaPart(formula) {
         matches[3] = '0';
     return createDiceFormulaPart({
         numberOfDice: parseInt(matches[1]),
-        diceFaces: parseInt(matches[2]),
-        modifier: parseInt(matches[3])
+        diceFaces: parseInt(matches[2])
     });
 }

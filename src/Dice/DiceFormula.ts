@@ -2,42 +2,49 @@
 import {DiceResult} from "./DiceResult";
 
 export interface DiceFormula {
+    hasModifier: () => boolean;
     hasRolled: () => boolean;
     max: () => number;
     min: () => number;
     roll: () => DiceResult[];
     toString: () => string;
 
+    modifier?: number;
     parts?: DiceFormulaPart[];
     lastResult: DiceResult[];
 }
 
-export type DiceFormulaProps = Omit<DiceFormula, 'hasRolled' | 'max' | 'min' | 'roll'>;
+export type DiceFormulaProps = Omit<DiceFormula, 'hasModifier' | 'hasRolled' | 'max' | 'min' | 'roll'>;
 
 export function createDiceFormula(data: DiceFormulaProps = {lastResult: []}): DiceFormula {
     let lastResult: DiceResult[] = [];
-    const parts: DiceFormulaPart[] = [];
+    let initialModifier: number = data.modifier ?? 0;
+    const initialParts: DiceFormulaPart[] = data.parts ?? [];
+
+    function hasModifier(this: DiceFormula): boolean {
+        return this.modifier !== 0;
+    }
 
     const hasRolled = (): boolean => {
         return lastResult !== undefined;
     }
 
-    const max = (): number => {
+    function max(this: DiceFormula): number {
         let total = 0;
-        parts.forEach(part => total += part.max());
+        this.parts?.forEach(part => total += part.max());
         return total;
     }
 
-    const min = (): number => {
+    function min(this: DiceFormula): number {
         let total = 0;
-        parts.forEach(part => total += part.min());
+        this.parts?.forEach(part => total += part.min());
         return total;
     }
 
-    const roll = (): DiceResult[] => {
+    function roll(this: DiceFormula): DiceResult[] {
         const results: DiceResult[] = [];
 
-        parts.forEach((part) => {
+        this.parts?.forEach((part) => {
             part.roll
             // @ts-ignore
             results.push(part.hasRolled() ? part.lastResult : []);
@@ -47,28 +54,51 @@ export function createDiceFormula(data: DiceFormulaProps = {lastResult: []}): Di
         return results;
     }
 
+    function toString(this: DiceFormula): string {
+        let output = this.parts?.map(part => part.toString()).join(' + ') ?? '';
+        if (this.hasModifier()) output += ` + ${this.modifier}`;
+        return output;
+    }
+
     return {
-        ...data,
+        hasModifier,
         hasRolled,
+        lastResult,
         max,
         min,
-        roll
+        modifier: initialModifier,
+        parts: initialParts,
+        roll,
+        toString
     }
 }
 
 export function parseDiceFormula(formula: string): DiceFormula {
     const result: DiceFormulaPart[] = [];
-    formula = formula.replace(/\s/g, '');
-    const individualRolls = formula.split(/[=\-]/);
+    const output = createDiceFormula();
 
-    if (individualRolls === null) throw new Error(`Invalid dice formula: ${formula}`);
-    else if (individualRolls.length === 0) throw new Error(`Invalid dice formula: ${formula}`);
+    // Remove whitespace from the formula.
+    formula = formula.replace(/\s/g, '');
+    // Split the formula into individual rolls by the + and - operators.
+    const parts = formula.split(/[+\-]/);
+
+    if (parts === null) throw new Error(`Invalid dice formula: ${formula}`);
+    else if (parts.length === 0) throw new Error(`Invalid dice formula: ${formula}`);
     else {
-        individualRolls.forEach(roll => {
-            result.push(parseDiceFormulaPart(roll));
+        parts.forEach(part => {
+            // If the part is a number, it's a modifier.
+            const regex = /^\d+$/
+            if (regex.test(part)) {
+                output.modifier === undefined ?
+                    output.modifier = parseInt(part) :
+                    output.modifier += parseInt(part);
+            } else {
+                // Otherwise, it's a dice formula part.
+                result.push(parseDiceFormulaPart(part));
+            }
         })
     }
-    const output = createDiceFormula();
+
     output.parts = result;
     return output;
 }

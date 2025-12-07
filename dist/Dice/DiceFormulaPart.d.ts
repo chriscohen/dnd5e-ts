@@ -4,11 +4,10 @@ export interface DiceFormulaPart {
     max: () => number;
     min: () => number;
     roll: () => DiceResult;
-    toString: (includeModifier?: boolean) => string;
+    toString: () => string;
     diceFaces?: number;
     numberOfDice?: number;
     lastResult?: DiceResult;
-    modifier?: number;
 }
 export type DiceFormulaPartProps = Omit<DiceFormulaPart, 'hasRolled' | 'max' | 'min' | 'roll'>;
 export declare function createDiceFormulaPart(data?: DiceFormulaPartProps): DiceFormulaPart;

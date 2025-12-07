@@ -6,12 +6,11 @@ export interface DiceFormulaPart {
     max: () => number;
     min: () => number;
     roll: () => DiceResult;
-    toString: (includeModifier?: boolean) => string;
+    toString: () => string;
 
     diceFaces?: number;
     numberOfDice?: number;
     lastResult?: DiceResult;
-    modifier?: number;
 }
 
 export type DiceFormulaPartProps = Omit<DiceFormulaPart, 'hasRolled' | 'max' | 'min' | 'roll'>;
@@ -19,38 +18,28 @@ export type DiceFormulaPartProps = Omit<DiceFormulaPart, 'hasRolled' | 'max' | '
 export function createDiceFormulaPart(data: DiceFormulaPartProps = {}): DiceFormulaPart {
     const diceFaces: number = data.diceFaces ?? 6;
     let lastResult: DiceResult | undefined = data.lastResult ?? undefined;
-    const modifier: number = data.modifier ?? 0;
     const numberOfDice: number = data.numberOfDice ?? 1;
 
     const hasRolled = (): boolean => {
         return lastResult !== undefined;
     };
     const max = (): number => {
-        return diceFaces * numberOfDice + modifier;
+        return diceFaces * numberOfDice;
     };
     const min = (): number => {
-        return numberOfDice + modifier;
+        return numberOfDice;
     }
 
     const roll = (): DiceResult => {
         const rolls = Array(numberOfDice).fill(0).map(() => randomInt(1, diceFaces));
         lastResult = createDiceResult({
             rolls: rolls,
-            modifier: modifier,
-            total: rolls.reduce((a, b) => a + b, 0) + modifier
+            total: rolls.reduce((a, b) => a + b, 0)
         });
         return lastResult;
     }
 
-    const toString = (includeModifier: boolean = true): string => {
-        let output: string = `${numberOfDice}d${diceFaces}`
-
-        if (includeModifier && modifier !== 0) {
-            output += modifier < 0 ? ' - ' + Math.abs(modifier) : ` + ${modifier}`;
-        }
-
-        return output;
-    }
+    const toString = (): string => `${numberOfDice}d${diceFaces}`
 
     return {
         ...data,
@@ -64,7 +53,6 @@ export function createDiceFormulaPart(data: DiceFormulaPartProps = {}): DiceForm
         // Properties.
         diceFaces,
         lastResult,
-        modifier,
         numberOfDice,
         toString
     }
@@ -81,7 +69,6 @@ export function parseDiceFormulaPart(formula: string): DiceFormulaPart {
 
     return createDiceFormulaPart({
         numberOfDice: parseInt(matches[1]),
-        diceFaces: parseInt(matches[2]),
-        modifier: parseInt(matches[3])
+        diceFaces: parseInt(matches[2])
     });
 }
