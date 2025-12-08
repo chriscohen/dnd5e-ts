@@ -1,5 +1,5 @@
 ﻿import {test, expect} from 'vitest';
-import {createActorType, createAlignmentFromString, CreatureSize, CreatureType, loadCreatureType} from "../src";
+import {createActorType, createAlignmentFromString, CreatureSize, CreatureType, loadCreatureType} from "../../src";
 
 /**
  * Make sure size converts properly to a string.

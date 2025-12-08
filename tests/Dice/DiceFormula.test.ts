@@ -1,5 +1,5 @@
 ﻿import { expect, test } from 'vitest';
-import {parseDiceFormula} from "../src";
+import {parseDiceFormula} from "../../src";
 
 /**
  * Test that the formula is parsed into the correct number of parts.

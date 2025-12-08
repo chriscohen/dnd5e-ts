@@ -1,5 +1,5 @@
 ﻿import {expect, test} from 'vitest';
-import {AbilityType, createAbilityScoreFromNumber} from "../src";
+import {AbilityType, createAbilityScoreFromNumber} from "../../src";
 
 test.each([
     [15, true, '15 (+2)'],

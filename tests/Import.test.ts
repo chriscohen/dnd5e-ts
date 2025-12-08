@@ -29,7 +29,6 @@ describe.skip('Skipping import tests for now.', () => {
             "    ]\n" +
             "}\n";
 
-        const result = createSourcebook().fromJson(json);
         expect(result?.name).toBe('Adventure Atlas: The Mortuary');
     });
 });

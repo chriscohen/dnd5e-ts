@@ -13,6 +13,7 @@ function createActorType(data = {}) {
     const _hitPoints = data.hitPoints ?? (0, ActorHitPoints_1.createActorHitPoints)();
     const _isAlignmentTypically = data.isAlignmentTypically ?? false;
     const _isNamedCreature = data.isNamedCreature ?? false;
+    const _languages = data.languages ?? [];
     const _movementSpeeds = data.movementSpeeds ?? undefined;
     const _name = data.name ?? 'Unnamed Creature Type';
     const _size = data.size ?? enums_1.CreatureSize.MEDIUM;
@@ -52,12 +53,16 @@ function createActorType(data = {}) {
         const xp = constants_1.CR_XP[this.challengeRating];
         return xp ? xp : 0;
     }
+    function hasLanguage(name) {
+        return this.languages?.find((language) => language.language?.name?.toLowerCase() === name.toLowerCase()) !== undefined;
+    }
     return {
         getAlignment,
         getProficiencyBonus,
         getSize,
         getType,
         getXp,
+        hasLanguage,
         abilities: _abilities,
         alignment: _alignment,
         armorClass: _armorClass,
@@ -65,6 +70,7 @@ function createActorType(data = {}) {
         hitPoints: _hitPoints,
         isAlignmentTypically: _isAlignmentTypically,
         isNamedCreature: _isNamedCreature,
+        languages: _languages,
         movementSpeeds: _movementSpeeds,
         name: _name,
         size: _size,

@@ -27,7 +27,6 @@ test.each([
     expectedPublicationType: string*/
 ) => {
     const campaignSetting = createCampaignSetting().fromJson(json);
-    console.log('campaignsetting is ', campaignSetting);
     expect(campaignSetting.id).toBe(expectedId);
     expect(campaignSetting.name).toBe(expectedName);
     expect(campaignSetting.shortName).toBe(expectedShortName);

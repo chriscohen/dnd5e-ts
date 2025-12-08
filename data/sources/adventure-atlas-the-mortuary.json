@@ -1,0 +1,25 @@
+﻿{
+    "id": "c45da80b-ae01-42ec-ada8-99338eecd16c",
+    "name": "Adventure Atlas: The Mortuary",
+    "slug": "adventure-atlas-the-mortuary",
+    "cover_image": "adventure-atlas-the-mortuary.webp",
+    "description": "This supplement explores the Mortuary, its inhabitants, and the adventures buried within. This is a supplement to Planescape: Adventures in the Multiverse. However, you don't need to own that product or know much about Sigil to use this supplement, which includes material suitable for any Dungeons & Dragons campaign.",
+    "editions": [
+        {
+            "id": "e0f91189-8777-411c-b113-f747458a0964",
+            "name": "original",
+            "formats": ["dnd_beyond"],
+            "release_date": "2023-10-17"
+        }
+    ],
+    "game_edition": "5.5",
+    "product_ids": {
+        "wizards-of-the-coast": "SRC-00125"
+    },
+    "publication_type": "official",
+    "publisher": "wizards-of-the-coast",
+    "sourcebook_types": [
+        "lore",
+        "monsters"
+    ]
+}

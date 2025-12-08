@@ -1,11 +1,12 @@
 ﻿import {ActorAbilityScores, createActorAbilityScores} from "./ActorAbilityScores";
-import {ArmorClass} from "../ArmorClass";
+import {ArmorClass} from "../ArmorClass/ArmorClass";
 import {ActorHitPoints, createActorHitPoints} from "./ActorHitPoints";
 import {ActorMovementSpeeds} from "./ActorMovementSpeeds";
 import {CreatureSize} from "../enums";
 import {Alignment} from "../Alignment";
 import {CR_XP} from "../constants";
 import {CreatureType} from "../Types/CreatureType";
+import {ActorLanguage} from "./ActorLanguage";
 
 export interface ActorType {
     getAlignment: () => string | undefined;
@@ -13,6 +14,7 @@ export interface ActorType {
     getSize: () => string;
     getType: () => CreatureType | undefined;
     getXp(): number;
+    hasLanguage(this: ActorType, name: string): boolean;
 
     abilities?: ActorAbilityScores;
     alignment?: Alignment[];
@@ -21,6 +23,7 @@ export interface ActorType {
     hitPoints?: ActorHitPoints;
     isAlignmentTypically?: boolean;
     isNamedCreature?: boolean
+    languages?: ActorLanguage[];
     movementSpeeds?: ActorMovementSpeeds;
     name?: string;
     size?: CreatureSize;
@@ -30,7 +33,7 @@ export interface ActorType {
 
 export type ActorTypeProps = Omit<
     ActorType,
-    'getAlignment' | 'getProficiencyBonus' | 'getSize' | 'getType' | 'getXp'
+    'getAlignment' | 'getProficiencyBonus' | 'getSize' | 'getType' | 'getXp' | 'hasLanguage'
 >;
 
 export function createActorType(data: ActorTypeProps = {}): ActorType {
@@ -41,6 +44,7 @@ export function createActorType(data: ActorTypeProps = {}): ActorType {
     const _hitPoints = data.hitPoints ?? createActorHitPoints();
     const _isAlignmentTypically = data.isAlignmentTypically ?? false;
     const _isNamedCreature = data.isNamedCreature ?? false;
+    const _languages = data.languages ?? [];
     const _movementSpeeds = data.movementSpeeds ?? undefined;
     const _name = data.name ?? 'Unnamed Creature Type';
     const _size = data.size ?? CreatureSize.MEDIUM;
@@ -86,12 +90,19 @@ export function createActorType(data: ActorTypeProps = {}): ActorType {
         return xp ? xp : 0;
     }
 
+    function hasLanguage(this: ActorType, name: string): boolean {
+        return this.languages?.find(
+            (language: ActorLanguage) => language.language?.name?.toLowerCase() === name.toLowerCase()
+        ) !== undefined;
+    }
+
     return {
         getAlignment,
         getProficiencyBonus,
         getSize,
         getType,
         getXp,
+        hasLanguage,
 
         abilities: _abilities,
         alignment: _alignment,
@@ -100,6 +111,7 @@ export function createActorType(data: ActorTypeProps = {}): ActorType {
         hitPoints: _hitPoints,
         isAlignmentTypically: _isAlignmentTypically,
         isNamedCreature: _isNamedCreature,
+        languages: _languages,
         movementSpeeds: _movementSpeeds,
         name: _name,
         size: _size,

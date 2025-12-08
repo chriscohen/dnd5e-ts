@@ -1,5 +1,5 @@
 ﻿import {test, expect} from 'vitest';
-import {AlignmentGoodEvil, AlignmentLawChaos, createAlignment, createAlignmentFromString} from "../src";
+import {AlignmentGoodEvil, AlignmentLawChaos, createAlignment, createAlignmentFromString} from "../../src";
 
 /**
  * Make sure alignment converts to string properly.

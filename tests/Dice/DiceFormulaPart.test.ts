@@ -1,5 +1,5 @@
 ﻿import { expect, test } from 'vitest';
-import {createDiceFormulaPart, parseDiceFormulaPart} from "../src";
+import {createDiceFormulaPart, parseDiceFormulaPart} from "../../src";
 
 test('Before DiceFormulaPart.roll(), result is empty', () => {
     const notRolled = createDiceFormulaPart();

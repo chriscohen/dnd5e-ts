@@ -1,0 +1,1 @@
+{"version":3,"file":"ActorLanguage.d.ts","sourceRoot":"","sources":["../../src/Actor/ActorLanguage.ts"],"names":[],"mappings":"AAAA,OAAO,EAAC,QAAQ,EAAe,MAAM,oBAAoB,CAAC;AAE1D,MAAM,WAAW,aAAa;IAC1B,QAAQ,CAAC,EAAE,OAAO,CAAC;IACnB,aAAa,CAAC,EAAE,OAAO,CAAC;IACxB,QAAQ,CAAC,EAAE,QAAQ,CAAC;CACvB;AAED,wBAAgB,mBAAmB,CAAC,IAAI,GAAE,aAAa,GAAG,MAAW,GAAG,aAAa,CAyBpF"}
