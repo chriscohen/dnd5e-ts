@@ -1,30 +1,15 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.MovementSpeed = void 0;
+exports.createMovementSpeed = createMovementSpeed;
 const enums_1 = require("../enums");
-class MovementSpeed {
-    constructor(props = {}) {
-        this.type = enums_1.MovementType.WALK;
-        /**
-         * @property {boolean} isMetric
-         * @default false
-         *
-         * Indicates whether the movement speed is in metric units or imperial units.
-         */
-        this.isMetric = false;
-        this.type = props.type ?? enums_1.MovementType.WALK;
-        this.base = props.base ?? undefined;
-        this.isMetric = props.isMetric ?? false;
-    }
-    static create(props) {
-        // A raw number was passed in for a movement speed.
-        if (typeof (props) === 'number') {
-            // If the movement speed is 0, this creature doesn't have a movement speed of this kind, so we will return
-            // 'undefined'.
-            return props === 0 ? undefined : new MovementSpeed({ base: props });
-        }
-        // A MovementSpeedProps object was passed in.
-        return new MovementSpeed(props);
-    }
+function createMovementSpeed(data) {
+    const _base = data.base ?? 0;
+    const _isMetric = data.isMetric ?? false;
+    const _canHover = data.canHover ?? false;
+    const _type = data.type ?? enums_1.MovementType.WALK;
+    return {
+        base: _base,
+        isMetric: _isMetric,
+        type: _type
+    };
 }
-exports.MovementSpeed = MovementSpeed;

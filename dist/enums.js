@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UnitsTime = exports.UnitsMetric = exports.UnitsImperial = exports.SourcebookType = exports.SourceType = exports.SourcebookFormat = exports.PublicationType = exports.MovementType = exports.GameEditionEnum = exports.DataFileType = exports.CreatureType = exports.CreatureSize = exports.Binding = exports.AlignmentGoodEvil = exports.AlignmentLawChaos = exports.AbilityType = void 0;
+exports.UnitsTime = exports.UnitsMetric = exports.UnitsImperial = exports.SourcebookType = exports.SourceType = exports.SourcebookFormat = exports.PublicationType = exports.MovementType = exports.GameEditionEnum = exports.DataFileType = exports.CreatureSize = exports.Binding = exports.AlignmentGoodEvil = exports.AlignmentLawChaos = exports.AbilityType = void 0;
 var AbilityType;
 (function (AbilityType) {
     AbilityType[AbilityType["STR"] = 0] = "STR";
@@ -40,23 +40,6 @@ var CreatureSize;
     CreatureSize[CreatureSize["HUGE"] = 4] = "HUGE";
     CreatureSize[CreatureSize["GARGANTUAN"] = 5] = "GARGANTUAN";
 })(CreatureSize || (exports.CreatureSize = CreatureSize = {}));
-var CreatureType;
-(function (CreatureType) {
-    CreatureType[CreatureType["ABERRATION"] = 0] = "ABERRATION";
-    CreatureType[CreatureType["BEAST"] = 1] = "BEAST";
-    CreatureType[CreatureType["CELESTIAL"] = 2] = "CELESTIAL";
-    CreatureType[CreatureType["CONSTRUCT"] = 3] = "CONSTRUCT";
-    CreatureType[CreatureType["DRAGON"] = 4] = "DRAGON";
-    CreatureType[CreatureType["ELEMENTAL"] = 5] = "ELEMENTAL";
-    CreatureType[CreatureType["FEY"] = 6] = "FEY";
-    CreatureType[CreatureType["FIEND"] = 7] = "FIEND";
-    CreatureType[CreatureType["GIANT"] = 8] = "GIANT";
-    CreatureType[CreatureType["HUMANOID"] = 9] = "HUMANOID";
-    CreatureType[CreatureType["MONSTROSITY"] = 10] = "MONSTROSITY";
-    CreatureType[CreatureType["OOZE"] = 11] = "OOZE";
-    CreatureType[CreatureType["PLANT"] = 12] = "PLANT";
-    CreatureType[CreatureType["UNDEAD"] = 13] = "UNDEAD";
-})(CreatureType || (exports.CreatureType = CreatureType = {}));
 var DataFileType;
 (function (DataFileType) {
     DataFileType["JSON"] = "json";

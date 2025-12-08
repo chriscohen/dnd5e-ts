@@ -1,43 +1,65 @@
 ﻿import {ActorAbilityScores, createActorAbilityScores} from "./ActorAbilityScores";
 import {ArmorClass} from "../ArmorClass";
 import {ActorHitPoints, createActorHitPoints} from "./ActorHitPoints";
-import {ActorMovementSpeeds} from "../MovementSpeed/ActorMovementSpeeds";
-import {CreatureSize, CreatureType} from "../enums";
+import {ActorMovementSpeeds} from "./ActorMovementSpeeds";
+import {CreatureSize} from "../enums";
 import {Alignment} from "../Alignment";
+import {CR_XP} from "../constants";
+import {CreatureType} from "../Types/CreatureType";
 
 export interface ActorType {
     getAlignment: () => string | undefined;
+    getProficiencyBonus: () => number;
     getSize: () => string;
-    getType: () => string;
+    getType: () => CreatureType | undefined;
+    getXp(): number;
 
     abilities?: ActorAbilityScores;
-    alignments?: Alignment[];
+    alignment?: Alignment[];
     armorClass?: ArmorClass;
+    challengeRating?: number;
     hitPoints?: ActorHitPoints;
     isAlignmentTypically?: boolean;
+    isNamedCreature?: boolean
     movementSpeeds?: ActorMovementSpeeds;
+    name?: string;
     size?: CreatureSize;
     subtype?: string
     type?: CreatureType;
 }
 
-export type ActorTypeProps = Omit<ActorType, 'getAlignment' | 'getSize' | 'getType'>;
+export type ActorTypeProps = Omit<
+    ActorType,
+    'getAlignment' | 'getProficiencyBonus' | 'getSize' | 'getType' | 'getXp'
+>;
 
 export function createActorType(data: ActorTypeProps = {}): ActorType {
-    const abilities = data.abilities ?? createActorAbilityScores();
-    const armorClass = data.armorClass ?? undefined;
-    const hitPoints = data.hitPoints ?? createActorHitPoints();
-    const initialIsAlignmentTypically = data.isAlignmentTypically ?? false;
-    const movementSpeeds = data.movementSpeeds ?? undefined;
-    const initialSize = data.size ?? CreatureSize.MEDIUM;
-    const initialSubtype = data.subtype;
-    const initialType = data.type ?? CreatureType.HUMANOID;
+    const _abilities = data.abilities ?? createActorAbilityScores();
+    const _alignment = data.alignment ?? [];
+    const _armorClass = data.armorClass ?? undefined;
+    const _challengeRating = data.challengeRating ?? 0;
+    const _hitPoints = data.hitPoints ?? createActorHitPoints();
+    const _isAlignmentTypically = data.isAlignmentTypically ?? false;
+    const _isNamedCreature = data.isNamedCreature ?? false;
+    const _movementSpeeds = data.movementSpeeds ?? undefined;
+    const _name = data.name ?? 'Unnamed Creature Type';
+    const _size = data.size ?? CreatureSize.MEDIUM;
+    const _subtype = data.subtype;
+    const _type = data.type;
 
     function getAlignment(this: ActorType): string | undefined {
-        let output = this.isAlignmentTypically ? 'typically ' : '';
-        return this.alignments ?
-            output + this.alignments.map(alignment => alignment.toString()).join(' or ') :
+        if (this.alignment?.length === 0) return undefined;
+
+        let output = this.isAlignmentTypically ? 'Typically ' : '';
+        return this.alignment ?
+            output + this.alignment.map(alignment => alignment.toString()).join(' or ') :
             undefined;
+    }
+
+    function getProficiencyBonus(this: ActorType): number {
+        return this.challengeRating ?
+            2 + Math.max(Math.floor((this.challengeRating - 1) / 4), 0) :
+            2;
     }
 
     function getSize(this: ActorType): string {
@@ -52,38 +74,36 @@ export function createActorType(data: ActorTypeProps = {}): ActorType {
         }
     }
 
-    function getType(this: ActorType): string {
-        switch (this.type) {
-            case CreatureType.ABERRATION: return 'Aberration';
-            case CreatureType.BEAST: return 'Beast';
-            case CreatureType.CELESTIAL: return 'Celestial';
-            case CreatureType.CONSTRUCT: return 'Construct';
-            case CreatureType.DRAGON: return 'Dragon';
-            case CreatureType.ELEMENTAL: return 'Elemental';
-            case CreatureType.FEY: return 'Fey';
-            case CreatureType.FIEND: return 'Fiend';
-            case CreatureType.GIANT: return 'Giant';
-            default:
-            case CreatureType.HUMANOID: return 'Humanoid';
-            case CreatureType.MONSTROSITY: return 'Monstrosity';
-            case CreatureType.OOZE: return 'Ooze';
-            case CreatureType.PLANT: return 'Plant';
-            case CreatureType.UNDEAD: return 'Undead';
-        }
+    function getType(this: ActorType): CreatureType | undefined {
+        return this.type;
+    }
+
+    function getXp(this: ActorType): number {
+        if (!this.challengeRating) return 0;
+
+        // @ts-ignore
+        const xp = CR_XP[this.challengeRating]
+        return xp ? xp : 0;
     }
 
     return {
         getAlignment,
+        getProficiencyBonus,
         getSize,
         getType,
+        getXp,
 
-        abilities,
-        armorClass,
-        hitPoints,
-        isAlignmentTypically: initialIsAlignmentTypically,
-        movementSpeeds,
-        size: initialSize,
-        subtype: initialSubtype,
-        type: initialType
+        abilities: _abilities,
+        alignment: _alignment,
+        armorClass: _armorClass,
+        challengeRating: _challengeRating,
+        hitPoints: _hitPoints,
+        isAlignmentTypically: _isAlignmentTypically,
+        isNamedCreature: _isNamedCreature,
+        movementSpeeds: _movementSpeeds,
+        name: _name,
+        size: _size,
+        subtype: _subtype,
+        type: _type
     }
 }

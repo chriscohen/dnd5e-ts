@@ -1,39 +1,21 @@
 ﻿import {MovementType} from "../enums";
 
-export type MovementSpeedProps = {
-    type?: MovementType;
+export interface MovementSpeed {
     base?: number;
+    canHover?: boolean;
     isMetric?: boolean;
-};
+    type?: MovementType;
+}
 
-export class MovementSpeed {
+export function createMovementSpeed(data: MovementSpeed): MovementSpeed {
+    const _base: number = data.base ?? 0;
+    const _isMetric: boolean = data.isMetric ?? false;
+    const _canHover: boolean = data.canHover ?? false;
+    const _type: MovementType = data.type ?? MovementType.WALK;
 
-    type?: MovementType = MovementType.WALK
-    base?: number;
-
-    /**
-     * @property {boolean} isMetric
-     * @default false
-     *
-     * Indicates whether the movement speed is in metric units or imperial units.
-     */
-    isMetric?: boolean = false;
-
-    constructor(props: MovementSpeedProps = {}) {
-        this.type = props.type ?? MovementType.WALK;
-        this.base = props.base ?? undefined;
-        this.isMetric = props.isMetric ?? false;
-    }
-
-    static create(props: number | MovementSpeedProps): MovementSpeed | undefined {
-        // A raw number was passed in for a movement speed.
-        if (typeof(props) === 'number') {
-            // If the movement speed is 0, this creature doesn't have a movement speed of this kind, so we will return
-            // 'undefined'.
-            return props === 0 ? undefined : new MovementSpeed({base: props});
-        }
-
-        // A MovementSpeedProps object was passed in.
-        return new MovementSpeed(props);
+    return {
+        base: _base,
+        isMetric: _isMetric,
+        type: _type
     }
 }

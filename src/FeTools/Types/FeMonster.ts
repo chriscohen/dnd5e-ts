@@ -2,7 +2,7 @@
 import {FeResistance} from "./FeResistance";
 import {FeTrait} from "./FeTrait";
 
-export type Monster = {
+export type FeMonster = {
     name?: string;
     isNpc?: boolean;
     isNamedCreature?: boolean;

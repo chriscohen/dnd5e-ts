@@ -4,20 +4,32 @@ exports.createActorType = createActorType;
 const ActorAbilityScores_1 = require("./ActorAbilityScores");
 const ActorHitPoints_1 = require("./ActorHitPoints");
 const enums_1 = require("../enums");
+const constants_1 = require("../constants");
 function createActorType(data = {}) {
-    const abilities = data.abilities ?? (0, ActorAbilityScores_1.createActorAbilityScores)();
-    const armorClass = data.armorClass ?? undefined;
-    const hitPoints = data.hitPoints ?? (0, ActorHitPoints_1.createActorHitPoints)();
-    const initialIsAlignmentTypically = data.isAlignmentTypically ?? false;
-    const movementSpeeds = data.movementSpeeds ?? undefined;
-    const initialSize = data.size ?? enums_1.CreatureSize.MEDIUM;
-    const initialSubtype = data.subtype;
-    const initialType = data.type ?? enums_1.CreatureType.HUMANOID;
+    const _abilities = data.abilities ?? (0, ActorAbilityScores_1.createActorAbilityScores)();
+    const _alignment = data.alignment ?? [];
+    const _armorClass = data.armorClass ?? undefined;
+    const _challengeRating = data.challengeRating ?? 0;
+    const _hitPoints = data.hitPoints ?? (0, ActorHitPoints_1.createActorHitPoints)();
+    const _isAlignmentTypically = data.isAlignmentTypically ?? false;
+    const _isNamedCreature = data.isNamedCreature ?? false;
+    const _movementSpeeds = data.movementSpeeds ?? undefined;
+    const _name = data.name ?? 'Unnamed Creature Type';
+    const _size = data.size ?? enums_1.CreatureSize.MEDIUM;
+    const _subtype = data.subtype;
+    const _type = data.type;
     function getAlignment() {
-        let output = this.isAlignmentTypically ? 'typically ' : '';
-        return this.alignments ?
-            output + this.alignments.map(alignment => alignment.toString()).join(' or ') :
+        if (this.alignment?.length === 0)
+            return undefined;
+        let output = this.isAlignmentTypically ? 'Typically ' : '';
+        return this.alignment ?
+            output + this.alignment.map(alignment => alignment.toString()).join(' or ') :
             undefined;
+    }
+    function getProficiencyBonus() {
+        return this.challengeRating ?
+            2 + Math.max(Math.floor((this.challengeRating - 1) / 4), 0) :
+            2;
     }
     function getSize() {
         switch (this.size) {
@@ -31,35 +43,32 @@ function createActorType(data = {}) {
         }
     }
     function getType() {
-        switch (this.type) {
-            case enums_1.CreatureType.ABERRATION: return 'Aberration';
-            case enums_1.CreatureType.BEAST: return 'Beast';
-            case enums_1.CreatureType.CELESTIAL: return 'Celestial';
-            case enums_1.CreatureType.CONSTRUCT: return 'Construct';
-            case enums_1.CreatureType.DRAGON: return 'Dragon';
-            case enums_1.CreatureType.ELEMENTAL: return 'Elemental';
-            case enums_1.CreatureType.FEY: return 'Fey';
-            case enums_1.CreatureType.FIEND: return 'Fiend';
-            case enums_1.CreatureType.GIANT: return 'Giant';
-            default:
-            case enums_1.CreatureType.HUMANOID: return 'Humanoid';
-            case enums_1.CreatureType.MONSTROSITY: return 'Monstrosity';
-            case enums_1.CreatureType.OOZE: return 'Ooze';
-            case enums_1.CreatureType.PLANT: return 'Plant';
-            case enums_1.CreatureType.UNDEAD: return 'Undead';
-        }
+        return this.type;
+    }
+    function getXp() {
+        if (!this.challengeRating)
+            return 0;
+        // @ts-ignore
+        const xp = constants_1.CR_XP[this.challengeRating];
+        return xp ? xp : 0;
     }
     return {
         getAlignment,
+        getProficiencyBonus,
         getSize,
         getType,
-        abilities,
-        armorClass,
-        hitPoints,
-        isAlignmentTypically: initialIsAlignmentTypically,
-        movementSpeeds,
-        size: initialSize,
-        subtype: initialSubtype,
-        type: initialType
+        getXp,
+        abilities: _abilities,
+        alignment: _alignment,
+        armorClass: _armorClass,
+        challengeRating: _challengeRating,
+        hitPoints: _hitPoints,
+        isAlignmentTypically: _isAlignmentTypically,
+        isNamedCreature: _isNamedCreature,
+        movementSpeeds: _movementSpeeds,
+        name: _name,
+        size: _size,
+        subtype: _subtype,
+        type: _type
     };
 }

@@ -4,6 +4,3 @@
 
 # node
 node_modules
-
-# Data testing directory.
-/data/*

@@ -1,4 +1,15 @@
 import { Binding, SourcebookFormat } from "../enums";
+export type SourcebookEditionJsonItem = {
+    id: string;
+    name: string;
+    binding?: string;
+    formats?: string[];
+    isbn10?: string;
+    isbn13?: string;
+    is_primary: boolean;
+    pages?: number;
+    release_date?: string;
+};
 export interface SourcebookEdition {
     id?: string;
     binding?: Binding;

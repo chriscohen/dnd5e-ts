@@ -1,5 +1,5 @@
 ﻿import {test, expect} from 'vitest';
-import {createActorType, CreatureSize, CreatureType} from "../src";
+import {createActorType, createAlignmentFromString, CreatureSize, CreatureType, loadCreatureType} from "../src";
 
 /**
  * Make sure size converts properly to a string.
@@ -16,9 +16,20 @@ test.each([
  * Make sure type converts properly to a string.
  */
 test.each([
-    [{}, 'Humanoid'],
-    [{type: CreatureType.DRAGON}, 'Dragon'],
-])('getType() for %s should be "%s', (createProps: any, expected: string) => {
+    [{}, undefined],
+    [{type: loadCreatureType('dragon')}, 'dragon'],
+])('getType() for %s should be "%s', (createProps: any, expected: string | undefined) => {
     const actorType = createActorType(createProps);
-    expect(actorType.getType()).toBe(expected);
+    expect(actorType.getType()?.name).toBe(expected);
+});
+
+/**
+ * Make sure alignment converts properly to a string.
+ */
+test.each ([
+    [{}, undefined],
+    [{alignment: [createAlignmentFromString('lg')]}, 'Lawful Good'],
+])('getAlignment() for %s should be "%s"', (createProps: any, expected: string | undefined) => {
+    const actorType = createActorType(createProps);
+    expect(actorType.getAlignment()).toBe(expected);
 });

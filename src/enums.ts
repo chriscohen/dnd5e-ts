@@ -37,23 +37,6 @@ export enum CreatureSize {
     GARGANTUAN
 }
 
-export enum CreatureType {
-    ABERRATION,
-    BEAST,
-    CELESTIAL,
-    CONSTRUCT,
-    DRAGON,
-    ELEMENTAL,
-    FEY,
-    FIEND,
-    GIANT,
-    HUMANOID,
-    MONSTROSITY,
-    OOZE,
-    PLANT,
-    UNDEAD
-}
-
 export enum DataFileType {
     JSON = "json",
     YAML = "yml"

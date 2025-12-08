@@ -7,6 +7,5 @@ import axios from "axios";
  */
 export async function importFrom5eTools(path: string): Promise<any> {
     const response = await axios.get(FE_TOOLS_URL + path);
-    console.log(response.data);
     return response.data;
 }

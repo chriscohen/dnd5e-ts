@@ -12,6 +12,5 @@ const axios_1 = __importDefault(require("axios"));
  */
 async function importFrom5eTools(path) {
     const response = await axios_1.default.get(constants_1.FE_TOOLS_URL + path);
-    console.log(response.data);
     return response.data;
 }
