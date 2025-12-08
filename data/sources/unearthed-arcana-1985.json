@@ -18,7 +18,7 @@
             "release_date_month_only": true
         }
     ],
-    "game_edition": "1e",
+    "gameEdition": "1e",
     "product_code": "TSR2017",
     "product_ids": {
         "dungeon-masters-guild": "170096",

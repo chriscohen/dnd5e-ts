@@ -20,7 +20,7 @@
             "release_date": "2020-06-02"
         }
     ],
-    "game_edition": "5e",
+    "gameEdition": "5e",
     "product_code": "SRC-00061",
     "product_ids": {
         "drivethru-rpg": "442494",

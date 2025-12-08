@@ -18,7 +18,7 @@
             "release_date_month_only": true
         }
     ],
-    "game_edition": "3e",
+    "gameEdition": "3e",
     "product_code": "881560000",
     "product_ids": {
         "drivethru-rpg": "3734",

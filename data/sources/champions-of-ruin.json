@@ -18,7 +18,7 @@
             "release_date_month_only": true
         }
     ],
-    "game_edition": "3.5",
+    "gameEdition": "3.5",
     "product_code": "178720000",
     "product_ids": {
         "drivethru-rpg": "3730",

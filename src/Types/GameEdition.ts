@@ -1,6 +1,11 @@
 ﻿import {getJsonFromDataFile} from "../utils";
 import {AbstractType} from "./AbstractType";
 
+export type GameEditionDescription = {
+    description: string;
+    gameEdition: string;
+}
+
 export type GameEditionJsonItem = {
     fullName: string;
     name: string;

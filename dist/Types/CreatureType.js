@@ -4,13 +4,23 @@ exports.createCreatureType = createCreatureType;
 exports.loadCreatureType = loadCreatureType;
 exports.loadAllCreatureTypes = loadAllCreatureTypes;
 const utils_1 = require("../utils");
-function createCreatureType(data) {
-    const _description = data.description;
-    const _gameEditions = data.gameEditions ?? [];
-    const _id = data.id;
-    const _name = data.name;
-    const _plural = data.plural;
-    const _slug = data.slug;
+function createCreatureType(data = {}) {
+    let _description;
+    let _gameEditions = [];
+    let _id;
+    let _name;
+    let _plural;
+    let _slug;
+    if (typeof data === 'string') {
+    }
+    else {
+        _description = data.description;
+        _gameEditions = data.gameEditions;
+        _id = data.id;
+        _name = data.name;
+        _plural = data.plural;
+        _slug = data.slug;
+    }
     return {
         description: _description,
         gameEditions: _gameEditions,
@@ -45,9 +55,9 @@ function loadAllCreatureTypes() {
                 plural: item.plural,
                 slug: item.slug,
             });
-            item.editions.forEach(edition => output.gameEditions?.push({
+            item.editions.forEach((edition) => output.gameEditions?.push({
                 description: edition.description,
-                gameEdition: edition.game_edition
+                gameEdition: edition.gameEdition
             }));
             result.push(output);
         });

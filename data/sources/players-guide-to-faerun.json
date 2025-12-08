@@ -18,7 +18,7 @@
             "release_date_month_only": true
         }
     ],
-    "game_edition": "3.5",
+    "gameEdition": "3.5",
     "product_code": "886470000",
     "product_ids": {
         "dungeon-masters-guild": "29520",

@@ -17,7 +17,7 @@
             "release_date": "2014-08-19"
         }
     ],
-    "game_edition": "5e",
+    "gameEdition": "5e",
     "product_ids": {
         "dungeon-masters-guild": "442461",
         "drivethru-rpg": "442461"

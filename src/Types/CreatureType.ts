@@ -1,10 +1,6 @@
 ﻿import {AbstractType} from "./AbstractType";
 import {getJsonFromDataFile} from "../utils";
-
-export type GameEditionDescription = {
-    description: string;
-    game_edition: string;
-}
+import {GameEditionDescription} from "./GameEdition";
 
 export type CreatureTypeJsonItem = {
     description: string;
@@ -17,23 +13,31 @@ export type CreatureTypeJsonItem = {
 
 export interface CreatureType {
     description?: string;
-    gameEditions?: {
-        description: string;
-        gameEdition: string;
-    }[];
+    gameEditions?: GameEditionDescription[];
     id?: string;
     name?: string;
     plural?: string;
     slug?: string;
 }
 
-export function createCreatureType(data: CreatureType): CreatureType {
-    const _description: string | undefined = data.description;
-    const _gameEditions = data.gameEditions ?? [];
-    const _id: string | undefined = data.id;
-    const _name: string | undefined = data.name;
-    const _plural: string | undefined = data.plural;
-    const _slug: string | undefined = data.slug;
+export function createCreatureType(data: CreatureType | string = {}): CreatureType {
+    let _description: string | undefined;
+    let _gameEditions: GameEditionDescription[] | undefined = [];
+    let _id: string | undefined;
+    let _name: string | undefined;
+    let _plural: string | undefined;
+    let _slug: string | undefined;
+
+    if (typeof data === 'string') {
+
+    } else {
+        _description = data.description;
+        _gameEditions = data.gameEditions;
+        _id = data.id;
+        _name = data.name;
+        _plural = data.plural;
+        _slug = data.slug;
+    }
 
     return {
         description: _description,
@@ -75,9 +79,9 @@ export function  loadAllCreatureTypes<CreatureType>(): AbstractType<CreatureType
                 slug: item.slug,
             });
 
-            item.editions.forEach(edition => output.gameEditions?.push({
+            item.editions.forEach((edition: GameEditionDescription) => output.gameEditions?.push({
                 description: edition.description,
-                gameEdition: edition.game_edition
+                gameEdition: edition.gameEdition
             }));
 
             result.push(output);

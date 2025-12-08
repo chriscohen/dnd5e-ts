@@ -18,7 +18,7 @@
             "release_date_month_only": true
         }
     ],
-    "game_edition": "2e",
+    "gameEdition": "2e",
     "product_code": "TSR9358",
     "product_ids": {
         "drivethru-rpg": "16384",

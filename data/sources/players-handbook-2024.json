@@ -22,7 +22,7 @@
             "release_date": "2024-09-03"
         }
     ],
-    "game_edition": "5e (2024)",
+    "gameEdition": "5e (2024)",
     "product_ids": {
         "dungeon-masters-guild": "484613",
         "drivethru-rpg": "484613"

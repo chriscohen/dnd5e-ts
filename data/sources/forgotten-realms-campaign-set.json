@@ -46,7 +46,7 @@
             "release_date_month_only": true
         }
     ],
-    "game_edition": "1e",
+    "gameEdition": "1e",
     "product_ids": {
         "drivethru-rpg": "478917",
         "dungeon-masters-guild": "478917"
